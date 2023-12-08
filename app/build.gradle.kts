@@ -4,12 +4,12 @@ plugins {
 
 android {
     namespace = "jp.ac.ecc.se.voteapp"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "jp.ac.ecc.se.voteapp"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
