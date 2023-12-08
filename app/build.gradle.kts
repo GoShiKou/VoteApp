@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace = "jp.ac.ecc.se.voteapp"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "jp.ac.ecc.se.voteapp"
