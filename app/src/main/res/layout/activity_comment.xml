@@ -9,35 +9,38 @@
         android:id="@+id/CommentView"
         android:layout_width="0dp"
         android:layout_height="243dp"
-        android:layout_marginTop="48dp"
-        android:text="TextView"
+        android:layout_marginTop="44dp"
+        android:text="CommentView"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextText2"
-        android:layout_width="364dp"
-        android:layout_height="52dp"
+        android:id="@+id/NameEdit"
+        android:layout_width="392dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
-        android:layout_marginEnd="36dp"
+        android:layout_marginEnd="8dp"
         android:ems="10"
         android:inputType="text"
         android:text="@string/NameEdit"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/CommentView" />
 
     <EditText
-        android:id="@+id/editTextText3"
+        android:id="@+id/CommentEdit"
         android:layout_width="392dp"
-        android:layout_height="143dp"
-        android:layout_marginTop="28dp"
+        android:layout_height="142dp"
+        android:layout_marginTop="40dp"
         android:ems="10"
         android:inputType="text"
         android:text="@string/CommentEdit"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText2" />
+        app:layout_constraintTop_toBottomOf="@+id/NameEdit" />
 </androidx.constraintlayout.widget.ConstraintLayout>
