@@ -27,10 +27,10 @@ public class CreatePage extends AppCompatActivity {
 //            TextView newOptionTextView = new TextView(this);
 //            newOptionTextView.setText(newOptionText);
 //
-//            // 將新選項添加到選項布局中
+//            // add new option
 //            optionsLayout.addView(newOptionTextView);
 //
-//            // 清空輸入框
+//            // clear input
 //            newOptionEditText.getText().clear();
 //        }
 //    }
