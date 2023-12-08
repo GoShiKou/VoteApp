@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">VoteApp</string>
+    <string name="NameEdit">名前を入力してください</string>
+    <string name="CommentEdit">コメントを入力してください</string>
 </resources>
