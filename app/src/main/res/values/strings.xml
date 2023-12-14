@@ -2,4 +2,9 @@
     <string name="app_name">VoteApp</string>
     <string name="NameEdit">名前を入力してください</string>
     <string name="CommentEdit">コメントを入力してください</string>
+    <string name="TtileHint">何を聞きたいですか</string>
+    <string name="ContHint">詳細説明</string>
+    <string name="cancel">取消</string>
+    <string name="send">投稿</string>
+    <string name="add">追加</string>
 </resources>
