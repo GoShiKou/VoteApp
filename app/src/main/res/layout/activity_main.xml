@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/button8"
+        android:id="@+id/Third"
         android:layout_width="120dp"
         android:layout_height="104dp"
         android:layout_marginTop="8dp"
@@ -15,17 +15,17 @@
         android:text="Button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/button5"
+        app:layout_constraintStart_toEndOf="@+id/Second"
         app:layout_constraintTop_toBottomOf="@+id/topText" />
 
     <Button
-        android:id="@+id/button9"
+        android:id="@+id/First"
         android:layout_width="120dp"
         android:layout_height="104dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Button"
-        app:layout_constraintEnd_toStartOf="@+id/button5"
+        app:layout_constraintEnd_toStartOf="@+id/Second"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/topText" />
@@ -36,7 +36,7 @@
         android:layout_height="68dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="アプリ名"
+        android:text="皆にお任せ"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:textSize="34sp" />
@@ -95,7 +95,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button9"
+        app:layout_constraintTop_toBottomOf="@+id/First"
         app:srcCompat="@drawable/_4560866" />
 
     <TextView
@@ -105,7 +105,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/button9"
+        app:layout_constraintTop_toBottomOf="@+id/First"
         tools:text="新規"
         tools:textSize="24sp" />
 
@@ -122,14 +122,14 @@
         app:layout_constraintTop_toBottomOf="@+id/newText" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/Second"
         android:layout_width="120dp"
         android:layout_height="104dp"
         android:layout_marginTop="8dp"
         android:text="Button"
-        app:layout_constraintEnd_toStartOf="@+id/button8"
+        app:layout_constraintEnd_toStartOf="@+id/Third"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/button9"
+        app:layout_constraintStart_toEndOf="@+id/First"
         app:layout_constraintTop_toBottomOf="@+id/topText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
