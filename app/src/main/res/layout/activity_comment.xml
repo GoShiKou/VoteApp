@@ -9,7 +9,7 @@
         android:id="@+id/CommentView"
         android:layout_width="0dp"
         android:layout_height="243dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="8dp"
         android:text="CommentView"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -17,30 +17,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/NameEdit"
-        android:layout_width="392dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="8dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="@string/NameEdit"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CommentView" />
+    <ImageButton
+        android:id="@+id/imageButton19"
+        android:layout_width="134dp"
+        android:layout_height="69dp"
+        android:layout_marginTop="24dp"
+        android:drawingCacheQuality="auto"
+        android:scaleType="centerInside"
+        android:scrollbarAlwaysDrawHorizontalTrack="true"
+        android:scrollbarAlwaysDrawVerticalTrack="false"
+        android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@+id/CommentView"
+        app:srcCompat="@drawable/like_emojipng"
+        tools:layout_editor_absoluteX="231dp"
+        tools:visibility="visible" />
 
-    <EditText
-        android:id="@+id/CommentEdit"
-        android:layout_width="392dp"
-        android:layout_height="142dp"
-        android:layout_marginTop="40dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="@string/CommentEdit"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.473"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NameEdit" />
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="181dp"
+        android:layout_height="94dp"
+        android:layout_marginTop="8dp"
+        android:scaleType="centerInside"
+        app:layout_constraintTop_toBottomOf="@+id/CommentView"
+        app:srcCompat="@drawable/comment1"
+        tools:layout_editor_absoluteX="7dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
