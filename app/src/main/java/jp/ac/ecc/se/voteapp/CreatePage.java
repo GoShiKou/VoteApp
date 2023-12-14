@@ -23,6 +23,7 @@ public class CreatePage extends AppCompatActivity {
         EditText choice = findViewById(R.id.editText);
         Button Button1 = findViewById(R.id.add);
         Button Button2 = findViewById(R.id.button);
+        Button Button3 = findViewById(R.id.camera);
     }
 
 
