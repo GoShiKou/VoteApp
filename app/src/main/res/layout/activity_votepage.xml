@@ -14,27 +14,27 @@
         android:layout_marginBottom="8dp"
         android:gravity="center"
         android:text="Title"
-        app:layout_constraintBottom_toTopOf="@+id/radioGroup2"
+        app:layout_constraintBottom_toTopOf="@+id/vote_group"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.13" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/vote_cont"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/radioGroup2"
+        app:layout_constraintBottom_toTopOf="@+id/vote_group"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/vote_title" />
 
     <RadioGroup
-        android:id="@+id/radioGroup2"
+        android:id="@+id/vote_group"
         android:layout_width="0dp"
         android:layout_height="291dp"
         android:layout_marginStart="8dp"
