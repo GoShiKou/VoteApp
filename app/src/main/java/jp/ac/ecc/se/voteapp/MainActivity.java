@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     private Button VoteCreateButton;
@@ -16,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Intent create = new Intent(this, CreatePage.class);
+
+        ArrayList<String> voteList = new ArrayList<>();
 
         VoteCreateButton = findViewById(R.id.VoteCreate);
 
