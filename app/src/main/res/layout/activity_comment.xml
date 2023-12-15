@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:backgroundTint="@color/design_default_color_secondary_variant"
+    android:backgroundTintMode="add">
 
     <TextView
         android:id="@+id/CommentView"
@@ -18,11 +20,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/imageButton19"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
+        android:id="@+id/EmojiButton"
+        android:layout_width="136dp"
+        android:layout_height="81dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:backgroundTint="@color/white"
         android:drawingCacheQuality="auto"
         android:scaleType="centerInside"
         android:scrollbarAlwaysDrawHorizontalTrack="true"
@@ -33,26 +36,52 @@
         app:srcCompat="@drawable/like_emojipng"
         tools:visibility="visible" />
 
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="90dp"
-        android:layout_height="94dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:scaleType="centerInside"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CommentView"
-        app:srcCompat="@drawable/comment1" />
-
     <EditText
         android:id="@+id/CommentEdit"
         android:layout_width="374dp"
         android:layout_height="263dp"
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="text"
         android:text="コメントを入力してください"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton"
+        app:layout_constraintTop_toBottomOf="@+id/EmojiButton"
         tools:layout_editor_absoluteX="8dp" />
+
+    <Button
+        android:id="@+id/back2"
+        android:layout_width="102dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/design_default_color_secondary_variant"
+        android:text="戻り"
+        android:textColor="@color/design_default_color_surface"
+        android:textColorHighlight="@color/design_default_color_secondary_variant"
+        android:textColorLink="@color/design_default_color_secondary_variant"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/CommentEdit" />
+
+    <Button
+        android:id="@+id/ok"
+        android:layout_width="98dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="@color/design_default_color_secondary_variant"
+        android:text="確定"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/CommentEdit" />
+
+    <ImageButton
+        android:id="@+id/CommentButton"
+        android:layout_width="138dp"
+        android:layout_height="81dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/white"
+        android:scaleType="centerInside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/CommentView"
+        app:srcCompat="@drawable/comment" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
