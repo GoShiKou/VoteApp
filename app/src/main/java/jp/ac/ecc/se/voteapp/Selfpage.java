@@ -16,7 +16,6 @@ import java.util.List;
 
 public class Selfpage extends AppCompatActivity {
 
-    List<Post> postList = createSamplePosts();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
