@@ -29,33 +29,20 @@ public class CreatePage extends AppCompatActivity {
     public Uri image;
     Uri imageUri;
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        //requestCode == このアプリから読んだカメラの戻り＆＆resultCode == カメラの処理が正常終了
-        if (requestCode == CAMERA_RESULT && resultCode == RESULT_OK) {
-            //カメラからの戻り引数"Data"にある画像データを取り戻す
-//          Bitmap bitmap = data.getParcelableExtra("data");
-            //画面上のパーツImageViewを変数化
-            ImageView cameraImage = findViewById(R.id.image);
-            //受け取った画像データをセット
-            //cameraImage.setImageBitmap(bitmap);
-            cameraImage.setImageURI(imageUri);
-        }
-    }
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createpage);
 
-        ArrayList<String> datalist = new ArrayList<>();
-        //
+
         EditText taitoru = findViewById(R.id.taitoru);
         EditText memo = findViewById(R.id.memo);
         ListView ListView= findViewById(R.id.list);
         EditText choice = findViewById(R.id.editText);
-        Button AddButton = findViewById(R.id.add);
+
+        //Button AddButton = findViewById(R.id.add);
         Button post = findViewById(R.id.button);
         Button Camera = findViewById(R.id.camera);
 
@@ -117,7 +104,6 @@ public class CreatePage extends AppCompatActivity {
                     editor.apply();
 
                     Toast.makeText(getApplicationContext(), "保存しました", Toast.LENGTH_SHORT).show();
-//                    startActivity(intent_List);
                     finish();
                 }else{
                     Toast.makeText(getApplicationContext(), "タイトルとメモを入力してください", Toast.LENGTH_SHORT).show();
@@ -154,17 +140,18 @@ public class CreatePage extends AppCompatActivity {
             }
         });
 
+        //ArrayList<String> datalist = new ArrayList<>();
 
         //listに追加
-        AddButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!choice.getText().toString().isEmpty()) {
-                    datalist.add(choice.getText().toString());
-                    choice.setText("");
-                }
-            }
-        });
+//        AddButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (!choice.getText().toString().isEmpty()) {
+//                    datalist.add(choice.getText().toString());
+//                    choice.setText("");
+//                }
+//            }
+//        });
 
     }
 }
