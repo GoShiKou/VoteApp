@@ -43,7 +43,7 @@
 
     <EditText
         android:id="@+id/naiyoiu"
-        android:layout_width="0dp"
+        android:layout_width="404dp"
         android:layout_height="78dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
@@ -57,16 +57,9 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/sentakusi"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/back"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/naiyoiu" />
+        android:layout_width="409dp"
+        android:layout_height="522dp"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="144dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
