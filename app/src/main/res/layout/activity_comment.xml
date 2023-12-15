@@ -9,9 +9,11 @@
 
     <TextView
         android:id="@+id/CommentView"
-        android:layout_width="0dp"
-        android:layout_height="243dp"
+        android:layout_width="388dp"
+        android:layout_height="236dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:text="CommentView"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,69 +21,39 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/EmojiButton"
-        android:layout_width="136dp"
-        android:layout_height="81dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:backgroundTint="@color/white"
-        android:drawingCacheQuality="auto"
-        android:scaleType="centerInside"
-        android:scrollbarAlwaysDrawHorizontalTrack="true"
-        android:scrollbarAlwaysDrawVerticalTrack="false"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CommentView"
-        app:srcCompat="@drawable/like_emojipng"
-        tools:visibility="visible" />
-
-    <EditText
-        android:id="@+id/CommentEdit"
-        android:layout_width="374dp"
-        android:layout_height="263dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="コメントを入力してください"
-        app:layout_constraintTop_toBottomOf="@+id/EmojiButton"
-        tools:layout_editor_absoluteX="8dp" />
-
     <Button
-        android:id="@+id/back2"
+        android:id="@+id/Back2"
         android:layout_width="102dp"
         android:layout_height="56dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
         android:backgroundTint="@color/design_default_color_secondary_variant"
         android:text="戻り"
         android:textColor="@color/design_default_color_surface"
         android:textColorHighlight="@color/design_default_color_secondary_variant"
         android:textColorLink="@color/design_default_color_secondary_variant"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CommentEdit" />
-
-    <Button
-        android:id="@+id/ok"
-        android:layout_width="98dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:backgroundTint="@color/design_default_color_secondary_variant"
-        android:text="確定"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CommentEdit" />
+        tools:layout_editor_absoluteY="627dp" />
 
     <ImageButton
         android:id="@+id/CommentButton"
-        android:layout_width="138dp"
-        android:layout_height="81dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="186dp"
+        android:layout_height="72dp"
         android:layout_marginTop="8dp"
-        android:backgroundTint="@color/white"
+        android:layout_marginEnd="8dp"
         android:scaleType="centerInside"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/EmojiButton"
         app:layout_constraintTop_toBottomOf="@+id/CommentView"
         app:srcCompat="@drawable/comment" />
+
+    <ImageButton
+        android:id="@+id/EmojiButton"
+        android:layout_width="188dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:scaleType="centerInside"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/CommentView"
+        app:srcCompat="@drawable/like_emojipng" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

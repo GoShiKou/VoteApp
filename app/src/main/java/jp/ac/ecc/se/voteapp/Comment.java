@@ -1,5 +1,6 @@
 package jp.ac.ecc.se.voteapp;
 
+import android.media.Image;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,7 +21,13 @@ public class Comment extends AppCompatActivity {
         setContentView(R.layout.activity_comment);
 
         TextView CommentView = findViewById(R.id.CommentView);
-        EditText CommentEdit = findViewById(R.id.CommentEdit);
+        ImageButton EmojiButton = findViewById(R.id.EmojiButton);
+        ImageButton CommentButton = findViewById(R.id.CommentButton);
+
+
+        Button Back2 = findViewById(R.id.Back2);
+
+
 
 
 
