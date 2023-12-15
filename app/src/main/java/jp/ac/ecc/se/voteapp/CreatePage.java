@@ -2,6 +2,7 @@ package jp.ac.ecc.se.voteapp;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.widget.ListView;
 import android.widget.EditText;
@@ -20,6 +22,7 @@ import android.widget.Button;
 import android.view.View;
 import android.widget.ImageView;
 import android.net.Uri;
+import android.widget.Toast;
 
 public class CreatePage extends AppCompatActivity {
     final int CAMERA_RESULT = 100;
@@ -38,9 +41,7 @@ public class CreatePage extends AppCompatActivity {
             //受け取った画像データをセット
             //cameraImage.setImageBitmap(bitmap);
             cameraImage.setImageURI(imageUri);
-
         }
-
     }
 
     @Override
@@ -50,21 +51,86 @@ public class CreatePage extends AppCompatActivity {
 
         ArrayList<String> datalist = new ArrayList<>();
         //
+        EditText taitoru = findViewById(R.id.taitoru);
+        EditText memo = findViewById(R.id.memo);
         ListView ListView= findViewById(R.id.list);
         EditText choice = findViewById(R.id.editText);
         Button AddButton = findViewById(R.id.add);
-        Button Button2 = findViewById(R.id.button);
+        Button post = findViewById(R.id.button);
         Button Camera = findViewById(R.id.camera);
 
-        AddButton.setOnClickListener(new View.OnClickListener() {
+
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = pref.edit();
+        String str_titles=pref.getString("title", "");
+        ArrayList<String>tdTitleList=new ArrayList<>();
+        if(str_titles!=null&&!str_titles.equals("")){
+            String[] titleList=str_titles.split(",");
+            for(int i=0;i<titleList.length;i++){
+                tdTitleList.add(titleList[i]);
+            }
+        }
+        String pref_contents=pref.getString("content","");
+        ArrayList<String>contentlist=new ArrayList<>();
+        if(pref_contents!=null&&!pref_contents.equals("")){
+            String[]contentList =pref_contents.split(",");
+            for(int i=0;i<contentList.length;i++){
+                contentlist.add(contentList[i]);
+            }
+        }
+        String pref_images=pref.getString("image","");
+        ArrayList<String>imagelist= new ArrayList<>();
+        if(pref_images!=null&&!pref_images.equals("")){
+            String[]imageList=pref_images.split(",");
+            for(int i=0;i<imageList.length;i++){
+                imagelist.add(imageList[i]);
+            }
+        }
+        //保存ボタン
+        post.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                if (!choice.getText().toString().isEmpty()) {
-                    datalist.add(choice.getText().toString());
-                    choice.setText("");
+            public void onClick(View view) {
+                if(!taitoru.getText().toString().isEmpty()&&!memo.getText().toString().isEmpty()) {
+                    Intent intent_List = new Intent(CreatePage.this, MainActivity.class);
+
+                    String str_title = taitoru.getText().toString();
+                    tdTitleList.add(str_title);
+                    String str_titles = String.join(",", tdTitleList);
+                    editor.putString("title", str_titles);
+                    editor.apply();
+
+                    String str_content = memo.getText().toString();
+                    contentlist.add(str_content);
+                    String str_contents = String.join(",", contentlist);
+                    editor.putString("content", str_contents);
+                    editor.apply();
+
+                    String str_image;
+                    if (image != null) {
+                        str_image = image.toString();
+                    } else {
+                        str_image = "null";
+                    }
+                    imagelist.add(str_image);
+                    String str_images = String.join(",", imagelist);
+                    editor.putString("image", str_images);
+                    editor.apply();
+
+                    Toast.makeText(getApplicationContext(), "保存しました", Toast.LENGTH_SHORT).show();
+//                    startActivity(intent_List);
+                    finish();
+                }else{
+                    Toast.makeText(getApplicationContext(), "タイトルとメモを入力してください", Toast.LENGTH_SHORT).show();
                 }
+
             }
         });
+
+
+
+
+
+        //cameraButton
         Camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,6 +151,18 @@ public class CreatePage extends AppCompatActivity {
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
                 //カメラアプリ起動　戻りあたいあり
                 startActivityForResult(intent,CAMERA_RESULT);
+            }
+        });
+
+
+        //listに追加
+        AddButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!choice.getText().toString().isEmpty()) {
+                    datalist.add(choice.getText().toString());
+                    choice.setText("");
+                }
             }
         });
 
