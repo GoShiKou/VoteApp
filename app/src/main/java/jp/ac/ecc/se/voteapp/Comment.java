@@ -3,6 +3,7 @@ package jp.ac.ecc.se.voteapp;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,6 +20,9 @@ public class Comment extends AppCompatActivity {
         setContentView(R.layout.activity_comment);
 
         TextView CommentView = findViewById(R.id.CommentView);
+        EditText CommentEdit = findViewById(R.id.CommentEdit);
+
+
 
 
 
