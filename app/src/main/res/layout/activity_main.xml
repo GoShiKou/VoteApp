@@ -12,6 +12,7 @@
         android:layout_height="104dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:backgroundTint="#018584"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/Second"
@@ -24,6 +25,7 @@
         android:layout_height="104dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:backgroundTint="@color/design_default_color_secondary_variant"
         app:layout_constraintEnd_toStartOf="@+id/Second"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,8 +39,11 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="皆にお任せ"
+        android:textColor="#00BBD3"
+        android:textSize="34sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        tools:textColor="#00BCD4"
         tools:textSize="34sp" />
 
     <Button
@@ -48,6 +53,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
+        android:backgroundTint="@color/design_default_color_secondary_variant"
         android:text="投票作成"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,11 +66,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:ems="10"
+        android:background="#FEFEFE"
+        android:gravity="right"
         android:hint="検索"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/AppName"
+        tools:ems="10"
         tools:gravity="right"
         tools:layout_editor_absoluteY="15dp" />
 
@@ -121,13 +129,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newText" />
+        app:layout_constraintTop_toBottomOf="@+id/newText"
+        tools:background="#FEFEFE" />
 
     <Button
         android:id="@+id/Second"
         android:layout_width="120dp"
         android:layout_height="104dp"
         android:layout_marginTop="8dp"
+        android:backgroundTint="@color/design_default_color_secondary_variant"
         app:layout_constraintEnd_toStartOf="@+id/Third"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/First"
