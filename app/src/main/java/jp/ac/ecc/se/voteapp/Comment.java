@@ -19,8 +19,6 @@ import jp.ac.ecc.se.voteapp.R;
 
 public class Comment extends AppCompatActivity {
     int emojiButtonCount = 0;
-
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +30,6 @@ public class Comment extends AppCompatActivity {
         ImageButton CommentButton = findViewById(R.id.CommentButton);
         TextView MyCommentView = findViewById(R.id.MyCommentView);
         TextView UserName = findViewById(R.id.UserName);
-        ImageView Profileimg = findViewById(R.id.Profileimg);
         TextView EmojiNumber = findViewById(R.id.EmojiNumber);
         TextView CommentNumber = findViewById(R.id.CommentNUmber);
 
