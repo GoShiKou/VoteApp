@@ -3,6 +3,7 @@ package jp.ac.ecc.se.voteapp;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,8 +14,8 @@ public class VotePage extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_votepage);
-        EditText title= findViewById(R.id.taitoru);
-        EditText naiyou = findViewById(R.id.naiyoiu);
+        TextView title= findViewById(R.id.taitoru);
+        TextView naiyou = findViewById(R.id.naiyo);
         Button kakutei = findViewById(R.id.kakutei);
         Button  back = findViewById(R.id.back);
         RecyclerView sentakusi = findViewById(R.id.sentakusi);

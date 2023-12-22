@@ -8,6 +8,7 @@
     <string name="send">投稿</string>
     <string name="add">追加</string>
     <string name="option">選択</string>
-    <string name="back">戻り </string>
+    <string name="back">戻る</string>
     <string name="userid">\@UserId</string>
+    <string name="check">投票確定</string>
 </resources>
