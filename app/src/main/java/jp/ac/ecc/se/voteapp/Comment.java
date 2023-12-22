@@ -18,6 +18,7 @@ import java.util.Random;
 import jp.ac.ecc.se.voteapp.R;
 
 public class Comment extends AppCompatActivity {
+    int emojiButtonCount = 0;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +30,6 @@ public class Comment extends AppCompatActivity {
         ImageButton CommentButton = findViewById(R.id.CommentButton);
         TextView MyCommentView = findViewById(R.id.MyCommentView);
         TextView UserName = findViewById(R.id.UserName);
-        ImageView Profileimg = findViewById(R.id.Profileimg);
         TextView EmojiNumber = findViewById(R.id.EmojiNumber);
         TextView CommentNumber = findViewById(R.id.CommentNUmber);
 
@@ -82,31 +82,30 @@ public class Comment extends AppCompatActivity {
             }
         });
 
-        // EmojiButtonのクリックリスナーの設定
+
         EmojiButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 showRandomEmojis();
+                // Increment the count when EmojiButton is pressed
+                emojiButtonCount++;
+                updateEmojiButtonCount();
             }
         });
+
     }
 
     private void showRandomEmojis() {
-        // 絵文字のリスト
-        String[] emojis = {"😀", "😍", "🎉", "👍", "🌈", "🐱"};
+        // Update EmojiNumber TextView with the count
+        updateEmojiButtonCount();
+    }
 
-        // ランダムな数の絵文字を選択
-        Random random = new Random();
-        int randomCount = random.nextInt(emojis.length) + 1;
-        StringBuilder selectedEmojis = new StringBuilder();
-
-        for (int i = 0; i < randomCount; i++) {
-            int randomIndex = random.nextInt(emojis.length);
-            selectedEmojis.append(emojis[randomIndex]).append(" ");
-        }
-
-        // 絵文字を表示するTextViewに設定
-        TextView CommentView = findViewById(R.id.EmojiNumber);
-        CommentView.setText("Number of Emojis: " + randomCount + "\n" + selectedEmojis.toString());
+    private void updateEmojiButtonCount() {
+        // Display the count in EmojiNumber TextView
+        TextView emojiNumberView = findViewById(R.id.EmojiNumber);
+        emojiNumberView.setText( emojiButtonCount + "Emojis");
     }
 }
+
+
