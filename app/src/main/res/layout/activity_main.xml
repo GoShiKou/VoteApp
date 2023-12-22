@@ -32,56 +32,41 @@
         app:layout_constraintTop_toBottomOf="@+id/topText"
         tools:backgroundTint="@color/design_default_color_secondary_variant" />
 
-    <TextView
-        android:id="@+id/AppName"
-        android:layout_width="174dp"
-        android:layout_height="68dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="皆にお任せ"
-        android:textColor="#00BBD3"
-        android:textSize="34sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:textColor="#00BCD4"
-        tools:textSize="34sp" />
-
     <Button
         android:id="@+id/VoteCreate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:backgroundTint="@color/design_default_color_secondary_variant"
         android:text="投票作成"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AppName"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4"
         tools:backgroundTint="@color/design_default_color_secondary_variant" />
 
     <EditText
         android:id="@+id/SearchText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="8dp"
         android:background="#FEFEFE"
         android:gravity="right"
         android:hint="検索"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/AppName"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ems="10"
-        tools:gravity="right"
-        tools:layout_editor_absoluteY="15dp" />
+        tools:gravity="right" />
 
     <TextView
         android:id="@+id/topText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         android:text="TOP"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/VoteCreate"
@@ -92,7 +77,7 @@
         android:layout_width="62dp"
         android:layout_height="31dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/VoteCreate"
         app:srcCompat="@drawable/_61948" />
@@ -120,8 +105,8 @@
 
     <ListView
         android:id="@+id/voteList"
-        android:layout_width="409dp"
-        android:layout_height="353dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -143,5 +128,15 @@
         app:layout_constraintStart_toEndOf="@+id/First"
         app:layout_constraintTop_toBottomOf="@+id/topText"
         tools:backgroundTint="@color/design_default_color_secondary_variant" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="182dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/y9blv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
