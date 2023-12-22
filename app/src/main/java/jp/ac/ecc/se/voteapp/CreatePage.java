@@ -16,6 +16,7 @@ import java.util.Date;
 
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.EditText;
 import android.widget.Button;
@@ -28,33 +29,95 @@ public class CreatePage extends AppCompatActivity {
     final int CAMERA_RESULT = 100;
     public Uri image;
     Uri imageUri;
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //requestCode == このアプリから読んだカメラの戻り＆＆resultCode == カメラの処理が正常終了
+        if (requestCode == CAMERA_RESULT && resultCode == RESULT_OK) {
+            //カメラからの戻り引数"Data"にある画像データを取り戻す
+//            Bitmap bitmap = data.getParcelableExtra("data");
+            //画面上のパーツImageViewを変数化
+            ImageView cameraImage = findViewById(R.id.image);
+            //受け取った画像データをセット
+            //cameraImage.setImageBitmap(bitmap);
+            cameraImage.setImageURI(imageUri);
 
+        }
+
+    }
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createpage);
-
-
-
         EditText memo = findViewById(R.id.memo);
-        ListView ListView= findViewById(R.id.list);
-        EditText choice = findViewById(R.id.editText);
-
-        //Button AddButton = findViewById(R.id.add);
+        Button camera = findViewById(R.id.camera);
         Button post = findViewById(R.id.button);
-        Button Camera = findViewById(R.id.camera);
-        //Button backButton= findViewById(R.id.backButton);
-
-
         EditText taitoru = findViewById(R.id.taitoru);
-        String noteTitle = taitoru.getText().toString();
-        // タイトルをMainActivityに送信
-        Intent intent = new Intent();
-        intent.putExtra("noteTitle", noteTitle);
-        setResult(RESULT_OK, intent);
-        finish(); // Activityを閉じる
+        //投稿button
+        post.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String noteTitle = taitoru.getText().toString();
+                // タイトルをMainActivityに送信
+                Intent intent = new Intent();
+                intent.putExtra("noteTitle", noteTitle);
+                setResult(RESULT_OK, intent);
+
+
+                finish(); // Activityを閉じる
+            }
+        });
+
+
+        Button AddButton = findViewById(R.id.addButton);
+        EditText choice = findViewById(R.id.editText);
+        ListView ListView= findViewById(R.id.list);
+        ArrayList<String> datalist = new ArrayList<>();
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,datalist);
+        ListView.setAdapter(adapter);
+        //listに追加
+        AddButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!choice.getText().toString().isEmpty()) {
+                    datalist.add(choice.getText().toString());
+                    choice.setText("");
+                }
+            }
+        });
+        //kameraButton
+        camera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //カメラアプリ変数化
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                //変数名を作成
+                String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+                String fileName = "Traning_" + timestamp + "_.jpg";
+                //ファイル情報のための変数
+                ContentValues values = new ContentValues();
+                //ファイル名をセット
+                values.put(MediaStore.Images.Media.TITLE, fileName);
+                //ファイル形式を設定
+                values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
+                //保存画像情報の URI を生成する
+                imageUri =
+                        getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+                //カメラアプリに送る準備
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+                //カメラアプリ起動　戻りあたいあり
+                startActivityForResult(intent, CAMERA_RESULT);
+            }
+
+        });
+
+
+
+
+
+
 
 
 

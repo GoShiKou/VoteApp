@@ -1,16 +1,21 @@
 package jp.ac.ecc.se.voteapp;
 
 import android.app.AlertDialog;
-        import android.content.DialogInterface;
-        import android.os.Bundle;
-        import android.view.View;
-        import android.widget.Button;
-        import android.widget.ImageButton;
-        import android.widget.TextView;
-        import android.widget.EditText;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.EditText;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
-        import androidx.annotation.Nullable;
-        import androidx.appcompat.app.AppCompatActivity;
+import java.util.Random;
+
+import jp.ac.ecc.se.voteapp.R;
 
 public class Comment extends AppCompatActivity {
     @Override
@@ -23,6 +28,10 @@ public class Comment extends AppCompatActivity {
         Button Back2 = findViewById(R.id.Back2);
         ImageButton CommentButton = findViewById(R.id.CommentButton);
         TextView MyCommentView = findViewById(R.id.MyCommentView);
+        TextView UserName = findViewById(R.id.UserName);
+        ImageView Profileimg = findViewById(R.id.Profileimg);
+        TextView EmojiNumber = findViewById(R.id.EmojiNumber);
+        TextView CommentNumber = findViewById(R.id.CommentNUmber);
 
         // CommentButtonが押されたときの処理を追加
         CommentButton.setOnClickListener(new View.OnClickListener() {
@@ -59,10 +68,45 @@ public class Comment extends AppCompatActivity {
                         dialog.cancel();
                     }
                 });
-
                 // ダイアログを表示
                 builder.show();
             }
         });
+
+        Back2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // "VotePageActivity" に遷移
+                Intent intent = new Intent(Comment.this, VotePage.class);
+                startActivity(intent);
+            }
+        });
+
+        // EmojiButtonのクリックリスナーの設定
+        EmojiButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showRandomEmojis();
+            }
+        });
+    }
+
+    private void showRandomEmojis() {
+        // 絵文字のリスト
+        String[] emojis = {"😀", "😍", "🎉", "👍", "🌈", "🐱"};
+
+        // ランダムな数の絵文字を選択
+        Random random = new Random();
+        int randomCount = random.nextInt(emojis.length) + 1;
+        StringBuilder selectedEmojis = new StringBuilder();
+
+        for (int i = 0; i < randomCount; i++) {
+            int randomIndex = random.nextInt(emojis.length);
+            selectedEmojis.append(emojis[randomIndex]).append(" ");
+        }
+
+        // 絵文字を表示するTextViewに設定
+        TextView CommentView = findViewById(R.id.EmojiNumber);
+        CommentView.setText("Number of Emojis: " + randomCount + "\n" + selectedEmojis.toString());
     }
 }
