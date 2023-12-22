@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         voteCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(createPage);
+                startActivityForResult(createPage, 1234);
             }
         });
 
