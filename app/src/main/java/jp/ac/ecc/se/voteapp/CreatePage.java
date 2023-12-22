@@ -46,6 +46,19 @@ public class CreatePage extends AppCompatActivity {
 
     }
 
+    private EditText choice;
+    private ArrayList<String> datalist;
+    private ArrayAdapter<String> adapter;
+
+    public void addItem(){
+        String newItem = choice.getText().toString().trim();
+
+        if (!newItem.isEmpty()) {
+            datalist.add(newItem);
+            adapter.notifyDataSetChanged();
+            choice.setText("");
+        }
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,6 +68,8 @@ public class CreatePage extends AppCompatActivity {
         Button camera = findViewById(R.id.camera);
         Button post = findViewById(R.id.button);
         EditText taitoru = findViewById(R.id.taitoru);
+        Intent intent=getIntent();
+        int selno= intent.getIntExtra("selno",-1);
         //投稿button
         post.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,27 +79,22 @@ public class CreatePage extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.putExtra("noteTitle", noteTitle);
                 setResult(RESULT_OK, intent);
-
-
                 finish(); // Activityを閉じる
             }
         });
 
 
         Button AddButton = findViewById(R.id.addButton);
-        EditText choice = findViewById(R.id.editText);
+        choice = findViewById(R.id.editText);
         ListView ListView= findViewById(R.id.list);
-        ArrayList<String> datalist = new ArrayList<>();
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,datalist);
+        datalist = new ArrayList<>();
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,datalist);
         ListView.setAdapter(adapter);
         //listに追加
         AddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!choice.getText().toString().isEmpty()) {
-                    datalist.add(choice.getText().toString());
-                    choice.setText("");
-                }
+                addItem();
             }
         });
         //kameraButton
