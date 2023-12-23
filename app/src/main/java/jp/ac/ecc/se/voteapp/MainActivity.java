@@ -65,18 +65,4 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-    // CreatePageActivityからの結果を受け取る
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == REQUEST_CODE_CREATE_NOTE && resultCode == RESULT_OK && data != null) {
-            String title = data.getStringExtra("title");
-
-            // リストに追加して表示する
-            titleList.add(title);
-            adapter.notifyDataSetChanged();
-        }
-    }
 }
