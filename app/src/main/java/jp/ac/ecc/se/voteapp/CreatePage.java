@@ -26,6 +26,10 @@ import android.net.Uri;
 import android.widget.Toast;
 
 public class CreatePage extends AppCompatActivity {
+    private EditText choice;
+    private ArrayList<String> datalist;
+    private ArrayAdapter<String> adapter;
+
     final int CAMERA_RESULT = 100;
     public Uri image;
     Uri imageUri;
@@ -46,9 +50,6 @@ public class CreatePage extends AppCompatActivity {
 
     }
 
-    private EditText choice;
-    private ArrayList<String> datalist;
-    private ArrayAdapter<String> adapter;
 
     public void addItem(){
         String newItem = choice.getText().toString().trim();
