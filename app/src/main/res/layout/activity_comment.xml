@@ -68,7 +68,7 @@
         app:layout_constraintTop_toBottomOf="@+id/UserName" />
 
     <TextView
-        android:id="@+id/CommentNUmber"
+        android:id="@+id/CommentNumber"
         android:layout_width="108dp"
         android:layout_height="39dp"
         android:layout_marginTop="8dp"
