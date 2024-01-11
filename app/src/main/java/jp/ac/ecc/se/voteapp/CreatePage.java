@@ -3,7 +3,6 @@ package jp.ac.ecc.se.voteapp;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,7 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -27,7 +26,6 @@ import android.net.Uri;
 import android.widget.Toast;
 
 public class CreatePage extends AppCompatActivity {
-
     private EditText choice;
     private ArrayList<String> datalist;
     private ArrayAdapter<String> adapter;
@@ -67,22 +65,7 @@ public class CreatePage extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createpage);
-
-
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor editor = pref.edit();
-        String str_titles=pref.getString("title", "");
-        ArrayList<String>tdTitleList=new ArrayList<>();
-        if(str_titles!=null&&!str_titles.equals("")){
-            String[] titleList=str_titles.split(",");
-            for(int i=0;i<titleList.length;i++){
-                tdTitleList.add(titleList[i]);
-            }
-        }
-
-
-
-
+        EditText memo = findViewById(R.id.memo);
         Button camera = findViewById(R.id.camera);
         Button post = findViewById(R.id.button);
         EditText taitoru = findViewById(R.id.taitoru);
@@ -92,25 +75,11 @@ public class CreatePage extends AppCompatActivity {
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!taitoru.getText().toString().isEmpty()) {
-                    Intent intent_List = new Intent(CreatePage.this, MainActivity.class);
-
-                    String str_title = taitoru.getText().toString();
-                    tdTitleList.add(str_title);
-                    String str_titles = String.join(",", tdTitleList);
-                    editor.putString("title", str_titles);
-                    editor.apply();
-                    finish();
-                }else{
-                    Toast.makeText(getApplicationContext(), "タイトルを入力してください", Toast.LENGTH_SHORT).show();
-                }
-
-
-//                String noteTitle = taitoru.getText().toString();
-//                // タイトルをMainActivityに送信
-//                Intent intent = new Intent();
-//                intent.putExtra("noteTitle", noteTitle);
-//                setResult(RESULT_OK, intent);
+                String noteTitle = taitoru.getText().toString();
+                // タイトルをMainActivityに送信
+                Intent intent = new Intent();
+                intent.putExtra("noteTitle", noteTitle);
+                setResult(RESULT_OK, intent);
                 finish(); // Activityを閉じる
             }
         });
@@ -122,7 +91,7 @@ public class CreatePage extends AppCompatActivity {
         datalist = new ArrayList<>();
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,datalist);
         ListView.setAdapter(adapter);
-        //listに追加 addbutton
+        //listに追加
         AddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
