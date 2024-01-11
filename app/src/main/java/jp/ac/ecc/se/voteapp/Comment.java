@@ -26,6 +26,7 @@ public class Comment extends AppCompatActivity {
     private ArrayAdapter<String> adapter;
 
     int emojiButtonCount = 0;
+    int commentButtonCount = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,6 +62,8 @@ public class Comment extends AppCompatActivity {
                         adapter.notifyDataSetChanged(); // Notify the adapter that the data set has changed
                         MyCommentView.setAdapter(adapter);
                         // Dismiss the dialog
+                        commentButtonCount++;
+                        updateCommentButtonCount();
                         dialog.dismiss();
                     }
                 });
@@ -99,8 +102,13 @@ public class Comment extends AppCompatActivity {
 
     private void updateEmojiButtonCount() {
         TextView emojiNumberView = findViewById(R.id.EmojiNumber);
-        emojiNumberView.setText(emojiButtonCount + "Emojis");
+        emojiNumberView.setText( "Like" + emojiButtonCount  );
 
     }
-}
+
+        private void updateCommentButtonCount() {
+            TextView commentNumberView = findViewById(R.id.CommentNumber);
+            commentNumberView.setText( " Comments" + commentButtonCount );
+        }
+    }
 
