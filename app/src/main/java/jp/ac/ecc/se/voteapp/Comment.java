@@ -7,6 +7,7 @@ package jp.ac.ecc.se.voteapp;
         import android.content.Intent;
         import android.os.Bundle;
         import android.view.View;
+        import android.widget.ArrayAdapter;
         import android.widget.Button;
         import android.widget.EditText;
         import android.widget.ImageButton;
@@ -14,7 +15,12 @@ package jp.ac.ecc.se.voteapp;
         import androidx.annotation.Nullable;
         import androidx.appcompat.app.AppCompatActivity;
 
+        import java.util.ArrayList;
+
 public class Comment extends AppCompatActivity {
+
+    private ArrayList<String> commentList;
+    private ArrayAdapter<String> adapter;
 
     int emojiButtonCount = 0;
 
@@ -32,34 +38,43 @@ public class Comment extends AppCompatActivity {
         TextView EmojiNumber = findViewById(R.id.EmojiNumber);
         TextView CommentNumber = findViewById(R.id.CommentNumber);
 
-        CommentButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(Comment.this);
-                builder.setTitle("コメントを入力");
+        commentList = new ArrayList<>();
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_activated_1, commentList);
 
-                final EditText input = new EditText(Comment.this);
-                builder.setView(input);
-
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                CommentButton.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String comment = input.getText().toString();
-                        MyCommentView.setText(comment);
-                        dialog.dismiss();
+                    public void onClick(View view) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(Comment.this);
+                        builder.setTitle("コメントを入力");
+
+                        final EditText input = new EditText(Comment.this);
+                        builder.setView(input);
+
+                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                String comment = input.getText().toString();
+                                commentList.add(comment);
+                                adapter.notifyDataSetChanged();
+                                MyCommentView.setText(comment);
+
+                                // Dismiss the dialog
+                                dialog.dismiss();
+                            }
+                        });
+
+                        builder.setNegativeButton("キャンセル", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+
+                        builder.show();
                     }
                 });
 
-                builder.setNegativeButton("キャンセル", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
 
-                builder.show();
-            }
-        });
 
         Back2.setOnClickListener(new View.OnClickListener() {
             @Override
