@@ -24,7 +24,30 @@ public class VotePage extends AppCompatActivity {
         Button kakutei = findViewById(R.id.kakutei);
         Button  back = findViewById(R.id.back);
         RecyclerView sentakusi = findViewById(R.id.sentakusi);
+
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
