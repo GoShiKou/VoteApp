@@ -1,15 +1,14 @@
 package jp.ac.ecc.se.voteapp;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.List;
 
 public class VotePage extends AppCompatActivity {
 
@@ -19,12 +18,10 @@ public class VotePage extends AppCompatActivity {
         setContentView(R.layout.activity_votepage);
 
 
-        TextView title= findViewById(R.id.taitoru);
-        TextView naiyou = findViewById(R.id.naiyo);
-        Button kakutei = findViewById(R.id.kakutei);
-        Button  back = findViewById(R.id.back);
-        RecyclerView sentakusi = findViewById(R.id.sentakusi);
-    }
+        TextView title = findViewById(R.id.taitoru);
+        Button koment = findViewById(R.id.Comment);
+        Button back = findViewById(R.id.back);
 
 
-}
+
+    }}
