@@ -59,7 +59,6 @@ public class Comment extends AppCompatActivity {
                         String comment = input.getText().toString();
                         commentList.add(comment);
                         adapter.notifyDataSetChanged(); // Notify the adapter that the data set has changed
-                        // MyCommentView.setText(comment); // Remove this line, as it's not applicable to a ListView
                         MyCommentView.setAdapter(adapter);
                         // Dismiss the dialog
                         dialog.dismiss();
