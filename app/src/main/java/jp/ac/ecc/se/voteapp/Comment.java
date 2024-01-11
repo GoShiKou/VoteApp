@@ -85,7 +85,7 @@ public class Comment extends AppCompatActivity {
 
     private void updateEmojiButtonCount() {
         TextView emojiNumberView = findViewById(R.id.EmojiNumber);
-        emojiNumberView.setText(emojiButtonCount + " Emojis");
+        emojiNumberView.setText(emojiButtonCount + "Emojis");
     }
 }
 
