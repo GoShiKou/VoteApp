@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_CREATE_NOTE = 1;
     private ArrayList<String> titleList;
     private ArrayAdapter<String> adapter;
+    SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +62,23 @@ public class MainActivity extends AppCompatActivity {
 
         voteList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //リストクリック処理
+                String title =(String) adapterView.getItemAtPosition(i);
+                votePage.putExtra("title",title);
+
+                String str_contents = pref.getString("content","");
+                String[]memotList = str_contents.split(",");
+                System.out.println("ListActivity.onItemClick:"+i);
+                for(String s:memotList){
+                    System.out.println("ListActivity.onItemClick:"+title+"_"+s);
+                }
+                votePage.putExtra("content",memotList[i]);
+                String str_images = pref.getString("image","");
+                String[]imageList = str_images.split(",");
+                votePage.putExtra("image",imageList[i]);
+                votePage.putExtra("selecteditemPositon",i);
+                startActivity(votePage);
             }
         });
     }

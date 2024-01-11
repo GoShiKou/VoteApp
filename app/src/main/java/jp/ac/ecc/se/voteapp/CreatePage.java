@@ -2,8 +2,6 @@ package jp.ac.ecc.se.voteapp;
 
 import android.content.ContentValues;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -14,7 +12,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -22,8 +19,6 @@ import android.widget.EditText;
 import android.widget.Button;
 import android.view.View;
 import android.widget.ImageView;
-import android.net.Uri;
-import android.widget.Toast;
 
 public class CreatePage extends AppCompatActivity {
     private EditText choice;
@@ -87,7 +82,7 @@ public class CreatePage extends AppCompatActivity {
 
         Button AddButton = findViewById(R.id.addButton);
         choice = findViewById(R.id.editText);
-        ListView ListView= findViewById(R.id.list);
+        ListView ListView= findViewById(R.id.Glist);
         datalist = new ArrayList<>();
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,datalist);
         ListView.setAdapter(adapter);
