@@ -23,10 +23,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 
-
-
-
-
 public class VotePage extends AppCompatActivity {
     TextView showTitle;
     ImageView showImage;
@@ -35,9 +31,9 @@ public class VotePage extends AppCompatActivity {
 
     Uri imageUri;
 
-    //@SuppressLint("MissingInflatedId")
+    @SuppressLint("MissingInflatedId")
     @Override
-    protected void onCreate( Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_votepage);
 
@@ -47,7 +43,7 @@ public class VotePage extends AppCompatActivity {
         ImageView gazou = findViewById(R.id.gazou);
 
         pref = PreferenceManager.getDefaultSharedPreferences(this);
-        Intent intmain = new Intent(this, MainActivity.class);
+        Intent intentmain = new Intent(this, MainActivity.class);
         Intent intent = getIntent();
 
         showTitle = findViewById(R.id.taitoru);
@@ -90,7 +86,7 @@ public class VotePage extends AppCompatActivity {
             editor.remove("title");
 
             editor.putString("title", arrayToString(titleList));
-            editor.apply();
+
         }
     }
 
