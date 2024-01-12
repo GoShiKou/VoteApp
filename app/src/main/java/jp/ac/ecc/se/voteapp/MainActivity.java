@@ -22,8 +22,8 @@ import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_CREATE_NOTE = 1;
-    private ArrayList<String> titleList;
-    private ArrayAdapter<String> adapter;
+    ArrayList<String> titleList;
+    ArrayAdapter<String> adapter;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
     ListView voteList;

@@ -7,32 +7,6 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/Third"
-        android:layout_width="120dp"
-        android:layout_height="104dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:backgroundTint="#018584"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/Second"
-        app:layout_constraintTop_toBottomOf="@+id/topText"
-        tools:backgroundTint="@color/design_default_color_secondary_variant" />
-
-    <Button
-        android:id="@+id/First"
-        android:layout_width="120dp"
-        android:layout_height="104dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:backgroundTint="@color/design_default_color_secondary_variant"
-        app:layout_constraintEnd_toStartOf="@+id/Second"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topText"
-        tools:backgroundTint="@color/design_default_color_secondary_variant" />
-
-    <Button
         android:id="@+id/VoteCreate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -89,7 +63,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/First"
+        app:layout_constraintTop_toBottomOf="@+id/viewPager2"
         app:srcCompat="@drawable/_4560866" />
 
     <TextView
@@ -99,7 +73,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/First"
+        app:layout_constraintTop_toBottomOf="@+id/viewPager2"
         tools:text="新規"
         tools:textSize="24sp" />
 
@@ -114,20 +88,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newText"
-        tools:background="#FEFEFE" />
-
-    <Button
-        android:id="@+id/Second"
-        android:layout_width="120dp"
-        android:layout_height="104dp"
-        android:layout_marginTop="8dp"
-        android:backgroundTint="@color/design_default_color_secondary_variant"
-        app:layout_constraintEnd_toStartOf="@+id/Third"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/First"
-        app:layout_constraintTop_toBottomOf="@+id/topText"
-        tools:backgroundTint="@color/design_default_color_secondary_variant" />
+        app:layout_constraintTop_toBottomOf="@+id/newText" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -135,8 +96,21 @@
         android:layout_height="64dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:background="@color/material_dynamic_primary80"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/y9blv" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager2"
+        android:layout_width="0dp"
+        android:layout_height="118dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/material_dynamic_primary80"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
