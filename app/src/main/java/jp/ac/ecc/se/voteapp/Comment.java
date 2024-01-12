@@ -85,10 +85,8 @@ public class Comment extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
-
-                commentList.add("");
-                commentList.add("");
-
+//                commentList.add("");
+//                commentList.add("");
                 adapter.notifyDataSetChanged();
                 MyCommentView.setAdapter(adapter);
             }
