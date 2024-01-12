@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String> titleList;
     private ArrayAdapter<String> adapter;
     SharedPreferences pref;
+    SharedPreferences.Editor editor;
     ListView voteList;
 
     @Override
@@ -52,8 +54,19 @@ public class MainActivity extends AppCompatActivity {
         Button voteCreate = findViewById(R.id.VoteCreate);
         voteList = findViewById(R.id.voteList);
         EditText searchText = findViewById(R.id.SearchText);
-
         titleList = new ArrayList<>();
+
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
+        editor = pref.edit();
+        String str_title = pref.getString("title", "");
+        if (str_title != null && !str_title.equals("")) {
+            String[] List = str_title.split(",");
+
+            for (int i = 0; i < List.length; i++) {
+                titleList.add(List[i]);
+            }
+        }
+
         //アダプター
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_activated_1, titleList);
         voteList.setAdapter(adapter);
