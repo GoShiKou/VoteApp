@@ -70,17 +70,6 @@ public class Comment extends AppCompatActivity {
                         dialog.dismiss();
                     }
                 });
-
-//                builder.setNegativeButton("キャンセル", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        dialog.cancel();
-//                    }
-//                });
-//
-//                builder.show();
-//            }
-//        });
         builder.setNegativeButton("キャンセル", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -91,7 +80,6 @@ public class Comment extends AppCompatActivity {
                 MyCommentView.setAdapter(adapter);
             }
         });
-
         builder.show();
     }
 });
