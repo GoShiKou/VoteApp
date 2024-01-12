@@ -57,27 +57,50 @@ public class Comment extends AppCompatActivity {
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String comment = input.getText().toString();
-                        commentList.add(comment);
-                        adapter.notifyDataSetChanged(); // Notify the adapter that the data set has changed
-                        MyCommentView.setAdapter(adapter);
-                        // Dismiss the dialog
-                        commentButtonCount++;
-                        updateCommentButtonCount();
+                        String comment = input.getText().toString().trim();
+
+                        if (!comment.isEmpty()) {
+                            commentList.add(comment);
+                            commentButtonCount++;
+                            updateCommentButtonCount();
+                            adapter.notifyDataSetChanged();
+                            MyCommentView.setAdapter(adapter);
+                        }
+
                         dialog.dismiss();
                     }
                 });
 
-                builder.setNegativeButton("キャンセル", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
+//                builder.setNegativeButton("キャンセル", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        dialog.cancel();
+//                    }
+//                });
+//
+//                builder.show();
+//            }
+//        });
+        builder.setNegativeButton("キャンセル", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
 
-                builder.show();
+                commentList.add("");
+                commentList.add("");
+
+                adapter.notifyDataSetChanged();
+                MyCommentView.setAdapter(adapter);
             }
         });
+
+        builder.show();
+    }
+});
+
+
+
+
         Back2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,7 +120,9 @@ public class Comment extends AppCompatActivity {
     }
 
     private void showRandomEmojis() {
-        // Implement logic to show random emojis
+        // Implement logic to show random emoji
+       // String[] emojis = {"😊", "😍", "🥳", "👍", "❤️", "🎉", "😂", "🙌", "🌟", "😎"};
+
     }
 
     private void updateEmojiButtonCount() {
@@ -105,7 +130,6 @@ public class Comment extends AppCompatActivity {
         emojiNumberView.setText( "Like" + emojiButtonCount  );
 
     }
-
         private void updateCommentButtonCount() {
             TextView commentNumberView = findViewById(R.id.CommentNumber);
             commentNumberView.setText( " Comments" + commentButtonCount );
