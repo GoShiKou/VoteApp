@@ -16,12 +16,30 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_CREATE_NOTE = 1;
     private ArrayList<String> titleList;
     private ArrayAdapter<String> adapter;
     SharedPreferences pref;
+    ListView voteList;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        String str_title = pref.getString("title", "");
+        titleList.clear();
+        if (str_title != null && !str_title.equals("")) {
+            String[] List = str_title.split(",");
+
+            for (int i = 0; i < List.length; i++) {
+                titleList.add(List[i]);
+            }
+        }
+        voteList.setAdapter(adapter);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         Intent votePage = new Intent(this, VotePage.class);
 
         Button voteCreate = findViewById(R.id.VoteCreate);
-        ListView voteList = findViewById(R.id.voteList);
+        voteList = findViewById(R.id.voteList);
         EditText searchText = findViewById(R.id.SearchText);
 
         titleList = new ArrayList<>();
