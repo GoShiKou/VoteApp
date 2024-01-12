@@ -50,9 +50,7 @@ public class VotePage extends AppCompatActivity {
         String title = intent.getStringExtra("title");
         showTitle.setText(title);
 
-
-//        Intent intent = new Intent(this, Comment.class);
-
+        //Intent intent = new Intent(this, Comment.class);
 
         //前のページに戻る
         back.setOnClickListener(new View.OnClickListener() {
@@ -86,6 +84,7 @@ public class VotePage extends AppCompatActivity {
             editor.remove("title");
 
             editor.putString("title", arrayToString(titleList));
+            editor.apply();
 
         }
     }
@@ -94,7 +93,6 @@ public class VotePage extends AppCompatActivity {
         StringBuilder sb = new StringBuilder();
         for (String s : title) {
             sb.append(s).append(",");
-
         }
         return sb.toString().replaceAll("$", "");
     }
