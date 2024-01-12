@@ -76,6 +76,14 @@ public class CreatePage extends AppCompatActivity {
                 tdTitleList.add(titleList[i]);
             }
         }
+        String pref_images=pref.getString("image","");
+        ArrayList<String>imagelist= new ArrayList<>();
+        if(pref_images!=null&&!pref_images.equals("")){
+            String[]imageList=pref_images.split(",");
+            for(int i=0;i<imageList.length;i++){
+                imagelist.add(imageList[i]);
+            }
+        }
 
 
 
@@ -85,7 +93,7 @@ public class CreatePage extends AppCompatActivity {
         Button post = findViewById(R.id.button);
         EditText taitoru = findViewById(R.id.taitoru);
         Intent intent=getIntent();
-        int selno= intent.getIntExtra("selno",-1);
+        //int selno= intent.getIntExtra("selno",-1);
         //投稿button
         post.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,6 +113,7 @@ public class CreatePage extends AppCompatActivity {
 //                Intent intent = new Intent();
 //                intent.putExtra("noteTitle", noteTitle);
 //                setResult(RESULT_OK, intent);
+                    Toast.makeText(getApplicationContext(), "保存しました", Toast.LENGTH_SHORT).show();
                     finish(); // Activityを閉じる
                 }else {
                     Toast.makeText(getApplicationContext(), "タイトルを入力してください", Toast.LENGTH_SHORT).show();
