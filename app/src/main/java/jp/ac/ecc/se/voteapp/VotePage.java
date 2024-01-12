@@ -79,6 +79,7 @@ public class VotePage extends AppCompatActivity {
         for (int i = 0; i < list.length; i++) {
             titleList.add(list[i]);
 
+
         }
         if (position < titleList.size()) {
             editor.remove("title");
