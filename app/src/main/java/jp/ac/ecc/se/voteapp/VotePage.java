@@ -50,7 +50,7 @@ public class VotePage extends AppCompatActivity {
         String title = intent.getStringExtra("title");
         showTitle.setText(title);
 
-        //Intent intent = new Intent(this, Comment.class);
+//        Intent intent = new Intent(this, Comment.class);
 
         //前のページに戻る
         back.setOnClickListener(new View.OnClickListener() {
