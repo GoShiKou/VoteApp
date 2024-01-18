@@ -89,6 +89,7 @@ public class CreatePage extends AppCompatActivity {
 
 
 
+
         Button camera = findViewById(R.id.camera);
         Button post = findViewById(R.id.button);
         EditText taitoru = findViewById(R.id.taitoru);
@@ -105,6 +106,17 @@ public class CreatePage extends AppCompatActivity {
                     tdTitleList.add(str_title);
                     String str_titles = String.join(",", tdTitleList);
                     editor.putString("title", str_titles);
+                    editor.apply();
+
+                    String str_image;
+                    if (image != null) {
+                        str_image = image.toString();
+                    } else {
+                        str_image = "null";
+                    }
+                    imagelist.add(str_image);
+                    String str_images = String.join(",", imagelist);
+                    editor.putString("image", str_images);
                     editor.apply();
 
 

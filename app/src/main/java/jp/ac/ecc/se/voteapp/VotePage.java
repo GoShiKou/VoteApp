@@ -52,6 +52,12 @@ public class VotePage extends AppCompatActivity {
         String title = intent.getStringExtra("title");
         showTitle.setText(title);
 
+        showImage = findViewById(R.id.imageView);
+        String image = intent.getStringExtra("image");
+        Uri imageUri= Uri.parse(image);
+        showImage.setImageURI(imageUri);
+
+
         //Intent intent = new Intent(this, Comment.class);
 
         //前のページに戻る
@@ -79,10 +85,20 @@ public class VotePage extends AppCompatActivity {
             titleList.add(list[i]);
 
         }
+
+        String pref_images = pref.getString("image","");
+        String[]imageList = pref_images.split(",");
+        ArrayList<String>imagelist=new ArrayList<>();
+        for(int i=0;i<imageList.length;i++){
+            imagelist.add(imageList[i]);
+        }
         if (position < titleList.size()) {
             editor.remove("title");
+            editor.remove("image");
+
 
             editor.putString("title", arrayToString(titleList));
+            editor.putString("image",arrayToString(imagelist));
             editor.apply();
 
         }
