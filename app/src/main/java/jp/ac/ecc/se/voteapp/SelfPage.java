@@ -24,9 +24,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class SelfPage extends AppCompatActivity {
-
-    private static final int REQUEST_CODE_CREATE_NOTE = 1;
-
     ArrayList<String> titlelist;
     ArrayAdapter<String> adapter;
 //
