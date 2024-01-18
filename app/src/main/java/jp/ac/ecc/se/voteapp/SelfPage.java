@@ -1,8 +1,14 @@
 package jp.ac.ecc.se.voteapp;
 
+import static android.text.method.TextKeyListener.clear;
+
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SelfPage extends AppCompatActivity {
@@ -22,7 +29,10 @@ public class SelfPage extends AppCompatActivity {
 
     private ArrayList<String> datalist;
     private ArrayAdapter<String> adapter;
-    SharedPreferences pref;
+
+    SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+
+    ListView selfVote;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,10 +40,11 @@ public class SelfPage extends AppCompatActivity {
         setContentView(R.layout.activity_selfpage);
 
 
-        ListView selfVote = findViewById(R.id.selfvote);
+        selfVote = findViewById(R.id.selfvote);
         ImageView img = findViewById(R.id.selfie);
         TextView text = findViewById(R.id.selfInfo);
         Button back = findViewById(R.id.backBtn);
+        Intent vtpg = new Intent(this, VotePage.class);
 
 
         // starting profile data
@@ -45,11 +56,18 @@ public class SelfPage extends AppCompatActivity {
         img.setImageResource(profileImageResId);
         text.setText(introduction);
 
-        // starting Adapter and LayoutManager
-        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+//        if(!pref.getString("list","").isEmpty()) {
+//            String[] titleSprit = pref.getString("list", "").split(",");
+//            datalist.addAll(Arrays.asList(titleSprit));
+//        }
 
-        // set Adapter and LayoutManager
-        selfVote.setAdapter(selfVote.getAdapter());
+        selfVote.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String title =(String) adapter.getItem(position);
+                vtpg.putExtra("title", title);
+            }
+        });
 
         // back to previous page
         back.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +78,22 @@ public class SelfPage extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        String str_title = pref.getString("title", "");
+        datalist.clear();
+        if (str_title != null && !str_title.equals("")) {
+            String[] List = str_title.split(",");
+
+            for (int i = 0; i < List.length; i++) {
+                datalist.add(List[i]);
+            }
+        }
+        selfVote.setAdapter(adapter);
+    }
+
     // create sample post data
     private List<Post> createSamplePosts() {
         List<Post> posts = new ArrayList<>();
@@ -68,6 +102,8 @@ public class SelfPage extends AppCompatActivity {
         // add more post
         return posts;
     }
+
+
 
 
 }

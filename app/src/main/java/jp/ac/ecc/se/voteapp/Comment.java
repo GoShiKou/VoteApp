@@ -11,6 +11,7 @@ package jp.ac.ecc.se.voteapp;
         import android.widget.Button;
         import android.widget.EditText;
         import android.widget.ImageButton;
+        import android.widget.ImageView;
         import android.widget.ListView;
         import android.widget.TextView;
         import androidx.annotation.Nullable;
@@ -33,12 +34,12 @@ public class Comment extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
 
-        TextView CommentView = findViewById(R.id.CommentView);
+        ImageView Image3 = findViewById(R.id.Image3);
+        TextView title = findViewById(R.id.commentTitle);
         ImageButton EmojiButton = findViewById(R.id.EmojiButton);
         Button Back2 = findViewById(R.id.Back2);
         ImageButton CommentButton = findViewById(R.id.CommentButton);
         ListView MyCommentView = findViewById(R.id.MyCommentView);
-        TextView UserName = findViewById(R.id.UserName);
         TextView EmojiNumber = findViewById(R.id.EmojiNumber);
         TextView CommentNumber = findViewById(R.id.CommentNumber);
 
@@ -92,6 +93,7 @@ public class Comment extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Comment.this, VotePage.class);
                 startActivity(intent);
+//                finish();
             }
         });
 
