@@ -42,6 +42,8 @@ public class VotePage extends AppCompatActivity {
         ListView sentaku = findViewById(R.id.sentakusi);
         ImageView gazou = findViewById(R.id.gazou);
 
+
+
         pref = PreferenceManager.getDefaultSharedPreferences(this);
         Intent intentmain = new Intent(this, MainActivity.class);
         Intent intent = getIntent();
@@ -66,13 +68,10 @@ public class VotePage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        //titleを持ってくる
-
-
     }
 
     private void removeTodoItem(SharedPreferences pref, SharedPreferences.Editor editor, int position) {
+
         String str_titles = pref.getString("title", "");
         String[] list = str_titles.split(",");
         ArrayList<String> titleList = new ArrayList<>();
@@ -88,6 +87,7 @@ public class VotePage extends AppCompatActivity {
 
         }
     }
+
 
     private String arrayToString(ArrayList<String> title) {
         StringBuilder sb = new StringBuilder();
