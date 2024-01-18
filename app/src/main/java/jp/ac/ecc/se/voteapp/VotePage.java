@@ -37,7 +37,6 @@ public class VotePage extends AppCompatActivity {
         Button koment = findViewById(R.id.Comment);
         Button back = findViewById(R.id.back);
         ListView sentaku = findViewById(R.id.sentakusi);
-        //ImageView gazou = findViewById(R.id.imageView);
 
 
 
