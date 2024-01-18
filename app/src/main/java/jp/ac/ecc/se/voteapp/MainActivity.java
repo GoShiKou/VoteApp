@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_activated_1, titleList);
         voteList.setAdapter(adapter);
 
+        // 検索の処理
         searchText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -86,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {}
         });
 
+        // 投票作成
         voteCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // 投票ページへ移動
         voteList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -112,14 +115,14 @@ public class MainActivity extends AppCompatActivity {
                 for(int lp=0;lp< memotList.length;lp++){
                     System.out.printf("memotList[%d] : %s\n",lp,memotList[lp]);
                 }
-/*
+
                 votePage.putExtra("content",memotList[i]);
-/*
+
                 String str_images = pref.getString("image","");
                 String[]imageList = str_images.split(",");
                 votePage.putExtra("image",imageList[i]);
                 votePage.putExtra("selecteditemPositon",i);
-*/
+
                 startActivity(votePage);
 
             }

@@ -48,10 +48,10 @@ public class VotePage extends AppCompatActivity {
         String title = intent.getStringExtra("title");
         showTitle.setText(title);
 
-//        showImage = findViewById(R.id.imageView);
-//        String image = intent.getStringExtra("image");
-//        Uri imageUri= Uri.parse(image);
-//        showImage.setImageURI(imageUri);
+        showImage = findViewById(R.id.imageView);
+        String image = intent.getStringExtra("image");
+        Uri imageUri= Uri.parse(image);
+        showImage.setImageURI(imageUri);
 
 
         //Intent intent = new Intent(this, Comment.class);
