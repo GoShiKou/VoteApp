@@ -1,15 +1,16 @@
 package jp.ac.ecc.se.voteapp;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import java.util.ArrayList;
@@ -17,8 +18,11 @@ import java.util.List;
 
 public class SelfPage extends AppCompatActivity {
 
+    private static final int REQUEST_CODE_CREATE_NOTE = 1;
+
     private ArrayList<String> datalist;
     private ArrayAdapter<String> adapter;
+    SharedPreferences pref;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,7 +30,7 @@ public class SelfPage extends AppCompatActivity {
         setContentView(R.layout.activity_selfpage);
 
 
-        RecyclerView post = findViewById(R.id.selfVote);
+        ListView selfVote = findViewById(R.id.selfvote);
         ImageView img = findViewById(R.id.selfie);
         TextView text = findViewById(R.id.selfInfo);
         Button back = findViewById(R.id.backBtn);
@@ -45,8 +49,7 @@ public class SelfPage extends AppCompatActivity {
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
 
         // set Adapter and LayoutManager
-        post.setAdapter(post.getAdapter());
-        post.setLayoutManager(layoutManager);
+        selfVote.setAdapter(selfVote.getAdapter());
 
         // back to previous page
         back.setOnClickListener(new View.OnClickListener() {
