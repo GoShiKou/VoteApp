@@ -110,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
                 votePage.putExtra("image",imageList[i]);
                 votePage.putExtra("selecteditemPositon",i);
                 startActivity(votePage);
+
             }
         });
     }

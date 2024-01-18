@@ -50,7 +50,7 @@ public class VotePage extends AppCompatActivity {
         String title = intent.getStringExtra("title");
         showTitle.setText(title);
 
-//        Intent intent = new Intent(this, Comment.class);
+        //Intent intent = new Intent(this, Comment.class);
 
         //前のページに戻る
         back.setOnClickListener(new View.OnClickListener() {
@@ -62,8 +62,7 @@ public class VotePage extends AppCompatActivity {
         //コメントページ
         koment.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(VotePage.this, Comment.class);
+            public void onClick(View v) {
                 startActivity(intent);
             }
         });
@@ -79,6 +78,7 @@ public class VotePage extends AppCompatActivity {
         ArrayList<String> titleList = new ArrayList<>();
         for (int i = 0; i < list.length; i++) {
             titleList.add(list[i]);
+
         }
         if (position < titleList.size()) {
             editor.remove("title");
