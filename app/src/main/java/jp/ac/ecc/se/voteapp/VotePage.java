@@ -27,30 +27,27 @@ public class VotePage extends AppCompatActivity {
     SharedPreferences.Editor editor;
 
     Uri imageUri;
-
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_votepage);
-
         Button koment = findViewById(R.id.Comment);
         Button back = findViewById(R.id.back);
         ListView sentaku = findViewById(R.id.sentakusi);
-
-
-
+        //ImageView gazou = findViewById(R.id.imageView);
         pref = PreferenceManager.getDefaultSharedPreferences(this);
-        Intent intentmain = new Intent(this, MainActivity.class);
+        Intent intentmain = new Intent(this, VotePage.class);
         Intent intent = getIntent();
 
         showTitle = findViewById(R.id.taitoru);
         String title = intent.getStringExtra("title");
         showTitle.setText(title);
-        showImage = findViewById(R.id.imageView);
-        String image = intent.getStringExtra("image");
-        Uri imageUri= Uri.parse(image);
-        showImage.setImageURI(imageUri);
+
+//        showImage = findViewById(R.id.imageView);
+//        String image = intent.getStringExtra("image");
+//        Uri imageUri= Uri.parse(image);
+//        showImage.setImageURI(imageUri);
 
 
         //Intent intent = new Intent(this, Comment.class);
@@ -66,9 +63,10 @@ public class VotePage extends AppCompatActivity {
         koment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(intent);
+                startActivity(intentmain);
             }
         });
+
     }
 
     private void removeTodoItem(SharedPreferences pref, SharedPreferences.Editor editor, int position) {
@@ -90,8 +88,6 @@ public class VotePage extends AppCompatActivity {
         if (position < titleList.size()) {
             editor.remove("title");
             editor.remove("image");
-
-
             editor.putString("title", arrayToString(titleList));
             editor.putString("image",arrayToString(imagelist));
             editor.apply();
