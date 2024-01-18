@@ -137,7 +137,7 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="4dp"
                         android:layout_weight="1"
-                        android:src="@drawable/home" />
+                        android:src="@drawable/nothome" />
 
                     <TextView
                         android:id="@+id/homeText"

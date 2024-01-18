@@ -27,17 +27,21 @@ public class VotePage extends AppCompatActivity {
     SharedPreferences.Editor editor;
 
     Uri imageUri;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_votepage);
+
         Button koment = findViewById(R.id.Comment);
         Button back = findViewById(R.id.back);
         ListView sentaku = findViewById(R.id.sentakusi);
-        //ImageView gazou = findViewById(R.id.imageView);
+
+
+
         pref = PreferenceManager.getDefaultSharedPreferences(this);
-        Intent intentmain = new Intent(this, VotePage.class);
+        Intent intentmain = new Intent(this, MainActivity.class);
         Intent intent = getIntent();
 
         showTitle = findViewById(R.id.taitoru);
@@ -63,7 +67,7 @@ public class VotePage extends AppCompatActivity {
         koment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(intentmain);
+                startActivity(intent);
             }
         });
 
@@ -88,6 +92,8 @@ public class VotePage extends AppCompatActivity {
         if (position < titleList.size()) {
             editor.remove("title");
             editor.remove("image");
+
+
             editor.putString("title", arrayToString(titleList));
             editor.putString("image",arrayToString(imagelist));
             editor.apply();
