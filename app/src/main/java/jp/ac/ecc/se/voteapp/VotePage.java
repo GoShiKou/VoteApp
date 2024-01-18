@@ -41,6 +41,7 @@ public class VotePage extends AppCompatActivity {
 
 
         pref = PreferenceManager.getDefaultSharedPreferences(this);
+        Intent intentcmt = new Intent(this, Comment.class);
         Intent intentmain = new Intent(this, MainActivity.class);
         Intent intent = getIntent();
 
@@ -60,14 +61,16 @@ public class VotePage extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                //finish();
+                startActivity(intentmain);
+
             }
         });
         //コメントページ
         koment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(intent);
+                startActivity(intentcmt);
             }
         });
 
