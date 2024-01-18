@@ -11,4 +11,6 @@
     <string name="back">戻る</string>
     <string name="userid">\@UserId</string>
     <string name="check">投票確定</string>
+    <string name="CommentNumber">Comment</string>
+    <string name="EmojiNumber">Emoji</string>
 </resources>
