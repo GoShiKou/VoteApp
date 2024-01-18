@@ -97,20 +97,29 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //リストクリック処理
+
                 String title =(String) adapterView.getItemAtPosition(i);
                 votePage.putExtra("title",title);
 
                 String str_contents = pref.getString("content","");
-                String[]memotList = str_contents.split(",");
+                String[] memotList = str_contents.split(",");
                 System.out.println("ListActivity.onItemClick:"+i);
+
                 for(String s:memotList){
                     System.out.println("ListActivity.onItemClick:"+title+"_"+s);
                 }
+
+                for(int lp=0;lp< memotList.length;lp++){
+                    System.out.printf("memotList[%d] : %s\n",lp,memotList[lp]);
+                }
+/*
                 votePage.putExtra("content",memotList[i]);
+/*
                 String str_images = pref.getString("image","");
                 String[]imageList = str_images.split(",");
                 votePage.putExtra("image",imageList[i]);
                 votePage.putExtra("selecteditemPositon",i);
+*/
                 startActivity(votePage);
 
             }
