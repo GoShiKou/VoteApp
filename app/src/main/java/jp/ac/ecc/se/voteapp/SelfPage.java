@@ -24,39 +24,32 @@ import java.util.Arrays;
 import java.util.List;
 
 public class SelfPage extends AppCompatActivity {
-    ArrayList<String> titlelist;
+    ArrayList<String> titlelist = new ArrayList<>();
     ArrayAdapter<String> adapter;
-//
-//    SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
     ListView selfVote;
+    SharedPreferences pref;
 //
 //
 //    @Override
 //    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 //        super.onActivityResult(requestCode, resultCode, data);
 //        String str_title = pref.getString("title", "");
-//        titlelist.clear();
 //        if (str_title != null && !str_title.equals("")) {
 //            String[] List = str_title.split(",");
-//
-//            for (int i = 0; i < List.length; i++) {
-//                titlelist.add(List[i]);
-//            }
+//            titlelist.addAll(Arrays.asList(List));
 //        }
-//        selfVote.setAdapter(adapter);
 //    }
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selfpage);
 
-//
+
         selfVote = findViewById(R.id.selfvote);
         ImageView img = findViewById(R.id.selfie);
         TextView text = findViewById(R.id.selfInfo);
         Button back = findViewById(R.id.backBtn);
         Intent vtpg = new Intent(this, VotePage.class);
-//
 //
         // starting profile data
         int profileImageResId = R.drawable.profile_img; // switch into your img
@@ -67,35 +60,32 @@ public class SelfPage extends AppCompatActivity {
         img.setImageResource(profileImageResId);
         text.setText(introduction);
 
-//        String str_title = pref.getString("title", "");
-//        if (str_title != null && !str_title.equals("")) {
-//            String[] List = str_title.split(",");
-//
-//            for (int i = 0; i < List.length; i++) {
-//                titlelist.add(List[i]);
-//            }
-//        }
-//        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_activated_1, titlelist);
-//        selfVote.setAdapter(adapter);
-//
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
+        if(!pref.getString("title","").isEmpty()) {
+            String[] titleSprit = pref.getString("title", "").split(",");
+            titlelist.addAll(Arrays.asList(titleSprit));
+        }
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_activated_1, titlelist);
+        selfVote.setAdapter(adapter);
+
 //
         selfVote.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
-//                String title =(String) adapter.getItem(i);
-//                vtpg.putExtra("title", title);
-//                String str_contents = pref.getString("content","");
-//                String[]memotList = str_contents.split(",");
-//                System.out.println("ListActivity.onItemClick:"+i);
-//                for(String s:memotList){
-//                    System.out.println("ListActivity.onItemClick:"+title+"_"+s);
-//                }
-//                vtpg.putExtra("content",memotList[i]);
-//                String str_images = pref.getString("image","");
-//                String[]imageList = str_images.split(",");
-//                vtpg.putExtra("image",imageList[i]);
-//                vtpg.putExtra("selecteditemPositon",i);
-//                startActivity(vtpg);
+                String title =(String) adapter.getItem(i);
+                vtpg.putExtra("title", title);
+                String str_contents = pref.getString("content","");
+                String[]memotList = str_contents.split(",");
+                System.out.println("ListActivity.onItemClick:"+i);
+                for(String s:memotList){
+                    System.out.println("ListActivity.onItemClick:"+title+"_"+s);
+                }
+                vtpg.putExtra("content",memotList[i]);
+                String str_images = pref.getString("image","");
+                String[]imageList = str_images.split(",");
+                vtpg.putExtra("image",imageList[i]);
+                vtpg.putExtra("selecteditemPositon",i);
+                startActivity(vtpg);
             }
         });
 //
