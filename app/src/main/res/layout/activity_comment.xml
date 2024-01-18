@@ -88,4 +88,12 @@
         tools:layout_editor_absoluteX="149dp"
         tools:layout_editor_absoluteY="33dp" />
 
+    <ImageView
+        android:id="@+id/Image3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="134dp"
+        tools:layout_editor_absoluteY="93dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
