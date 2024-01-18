@@ -28,9 +28,6 @@ public class Comment extends AppCompatActivity {
     int emojiButtonCount = 0;
     int commentButtonCount = 0;
 
-//    protected void onActivityResult(){
-//
-//    }
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +66,7 @@ public class Comment extends AppCompatActivity {
                             adapter.notifyDataSetChanged();
                             MyCommentView.setAdapter(adapter);
                         }
+
                         dialog.dismiss();
                     }
                 });
@@ -85,6 +83,10 @@ public class Comment extends AppCompatActivity {
         builder.show();
     }
 });
+
+
+
+
         Back2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,18 +98,18 @@ public class Comment extends AppCompatActivity {
         EmojiButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //showRandomEmojis();
+                showRandomEmojis();
                 emojiButtonCount++;
                 updateEmojiButtonCount();
             }
         });
     }
 
-//    /private void showRandomEmojis() {
-//        // Implement logic to show random emoji
-//       // String[] emojis = {"😊", "😍", "🥳", "👍", "❤️", "🎉", "😂", "🙌", "🌟", "😎"};
-//
-//    }
+    private void showRandomEmojis() {
+        // Implement logic to show random emoji
+       // String[] emojis = {"😊", "😍", "🥳", "👍", "❤️", "🎉", "😂", "🙌", "🌟", "😎"};
+
+    }
 
     private void updateEmojiButtonCount() {
         TextView emojiNumberView = findViewById(R.id.EmojiNumber);
