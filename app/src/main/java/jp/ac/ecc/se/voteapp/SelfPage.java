@@ -5,6 +5,7 @@ import static android.text.method.TextKeyListener.clear;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
@@ -19,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SelfPage extends AppCompatActivity {
@@ -28,8 +30,9 @@ public class SelfPage extends AppCompatActivity {
     private ArrayList<String> datalist;
     private ArrayAdapter<String> adapter;
 
+    SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+
     ListView selfVote;
-    SharedPreferences pref;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,6 +56,10 @@ public class SelfPage extends AppCompatActivity {
         img.setImageResource(profileImageResId);
         text.setText(introduction);
 
+//        if(!pref.getString("list","").isEmpty()) {
+//            String[] titleSprit = pref.getString("list", "").split(",");
+//            datalist.addAll(Arrays.asList(titleSprit));
+//        }
 
         selfVote.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
