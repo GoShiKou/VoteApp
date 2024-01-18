@@ -71,20 +71,20 @@ public class SelfPage extends AppCompatActivity {
 //
         selfVote.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
-                String title =(String) adapter.getItem(i);
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long id) {
+                String title =(String) adapterView.getItemAtPosition(i);
                 vtpg.putExtra("title", title);
                 String str_contents = pref.getString("content","");
-                String[]memotList = str_contents.split(",");
+                String[] memotList = str_contents.split(",");
                 System.out.println("ListActivity.onItemClick:"+i);
+
                 for(String s:memotList){
                     System.out.println("ListActivity.onItemClick:"+title+"_"+s);
                 }
-                vtpg.putExtra("content",memotList[i]);
-                String str_images = pref.getString("image","");
-                String[]imageList = str_images.split(",");
-                vtpg.putExtra("image",imageList[i]);
-                vtpg.putExtra("selecteditemPositon",i);
+
+                for(int lp=0;lp< memotList.length;lp++){
+                    System.out.printf("memotList[%d] : %s\n",lp,memotList[lp]);
+                }
                 startActivity(vtpg);
             }
         });
