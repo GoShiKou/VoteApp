@@ -47,7 +47,6 @@ public class VotePage extends AppCompatActivity {
         showTitle = findViewById(R.id.taitoru);
         String title = intent.getStringExtra("title");
         showTitle.setText(title);
-
         showImage = findViewById(R.id.imageView);
         String image = intent.getStringExtra("image");
         Uri imageUri= Uri.parse(image);
