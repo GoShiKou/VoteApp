@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         voteList = findViewById(R.id.voteList);
         EditText searchText = findViewById(R.id.SearchText);
         titleList = new ArrayList<>();
+        ImageView profile = findViewById(R.id.profileImage);
 
         pref = PreferenceManager.getDefaultSharedPreferences(this);
         editor = pref.edit();
@@ -113,5 +115,16 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        // プロフィールへ移動
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent toProfile = new Intent();
+                toProfile.setClass(MainActivity.this, SelfPage.class);
+                startActivity(toProfile);
+            }
+        });
+
     }
 }
