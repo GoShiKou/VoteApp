@@ -76,6 +76,14 @@ public class CreatePage extends AppCompatActivity {
                 tdTitleList.add(titleList[i]);
             }
         }
+        String pref_contents=pref.getString("content","");
+        ArrayList<String>contentlist=new ArrayList<>();
+        if(pref_contents!=null&&!pref_contents.equals("")){
+            String[]contentList =pref_contents.split(",");
+            for(int i=0;i<contentList.length;i++){
+                contentlist.add(contentList[i]);
+            }
+        }
         String pref_images=pref.getString("image","");
         ArrayList<String>imagelist= new ArrayList<>();
         if(pref_images!=null&&!pref_images.equals("")){
@@ -106,6 +114,16 @@ public class CreatePage extends AppCompatActivity {
                     tdTitleList.add(str_title);
                     String str_titles = String.join(",", tdTitleList);
                     editor.putString("title", str_titles);
+/****************************/
+
+                    ListView sentaku = findViewById(R.id.list);
+
+                    String str_content = sentaku.toString();
+                    contentlist.add(str_content);
+                    String str_contents = String.join(",", contentlist);
+                    editor.putString("content", str_contents);
+
+
                     editor.apply();
 
                     String str_image;
