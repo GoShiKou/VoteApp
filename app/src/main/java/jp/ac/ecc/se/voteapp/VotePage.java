@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -12,6 +13,8 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.net.Uri;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 
 import androidx.annotation.Nullable;
@@ -25,8 +28,8 @@ public class VotePage extends AppCompatActivity {
     ImageView showImage;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
-
     Uri imageUri;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -37,6 +40,7 @@ public class VotePage extends AppCompatActivity {
         Button koment = findViewById(R.id.Comment);
         Button back = findViewById(R.id.back);
         ListView sentaku = findViewById(R.id.sentakusi);
+
 
 
 
@@ -53,6 +57,11 @@ public class VotePage extends AppCompatActivity {
         String image = intent.getStringExtra("image");
         Uri imageUri= Uri.parse(image);
         showImage.setImageURI(imageUri);
+
+        ArrayList<String> retrivedlist = getDataFromSharedPreferences();
+
+        ArrayAdapter<String> adapter =new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,retrivedlist);
+        sentaku.setAdapter(adapter);
 
 
         //Intent intent = new Intent(this, Comment.class);
@@ -72,16 +81,23 @@ public class VotePage extends AppCompatActivity {
             }
         });
 
+
     }
 
+    private ArrayList<String> getDataFromSharedPreferences() {
+        SharedPreferences preferences = getSharedPreferences("listData",MODE_PRIVATE);
+        Set<String> detaSet = preferences.getStringSet("listData",new HashSet<>());
+
+        return new ArrayList<>(detaSet);
+    }
     private void removeTodoItem(SharedPreferences pref, SharedPreferences.Editor editor, int position) {
 
         String str_titles = pref.getString("title", "");
         String[] list = str_titles.split(",");
+
         ArrayList<String> titleList = new ArrayList<>();
         for (int i = 0; i < list.length; i++) {
             titleList.add(list[i]);
-
         }
 
         String pref_images = pref.getString("image","");
