@@ -42,6 +42,7 @@ public class VotePage extends AppCompatActivity {
 
         pref = PreferenceManager.getDefaultSharedPreferences(this);
         Intent intentmain = new Intent(this, MainActivity.class);
+        Intent coment = new Intent(this, Comment.class);
         Intent intent = getIntent();
 
         showTitle = findViewById(R.id.taitoru);
@@ -67,7 +68,7 @@ public class VotePage extends AppCompatActivity {
         koment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(intent);
+                startActivity(coment);
             }
         });
 
