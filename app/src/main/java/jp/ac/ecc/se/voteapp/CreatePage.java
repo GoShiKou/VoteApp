@@ -115,9 +115,7 @@ public class CreatePage extends AppCompatActivity {
                     String str_titles = String.join(",", tdTitleList);
                     editor.putString("title", str_titles);
 /****************************/
-
                     ListView sentaku = findViewById(R.id.list);
-
                     String str_content = sentaku.toString();
                     contentlist.add(str_content);
                     String str_contents = String.join(",", contentlist);
@@ -192,8 +190,24 @@ public class CreatePage extends AppCompatActivity {
 
         });
 
+        ImageView home = findViewById(R.id.homeI);
+        ImageView profile = findViewById(R.id.profileImageI);
+        Intent goHome = new Intent(this, MainActivity.class);
+        Intent goProfile = new Intent(this, SelfPage.class);
 
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(goHome);
+            }
+        });
 
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(goProfile);
+            }
+        });
 
 
 

@@ -18,8 +18,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_CREATE_NOTE = 1;
@@ -56,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         voteList = findViewById(R.id.voteList);
         EditText searchText = findViewById(R.id.SearchText);
         titleList = new ArrayList<>();
-        ImageView profile = findViewById(R.id.profileImage);
+        ImageView profile = findViewById(R.id.profileImageI);
 
         pref = PreferenceManager.getDefaultSharedPreferences(this);
         editor = pref.edit();
