@@ -26,6 +26,8 @@ import androidx.appcompat.app.AppCompatActivity;
 public class VotePage extends AppCompatActivity {
     TextView showTitle;
     ImageView showImage;
+    ImageView notH;
+    ImageView notP;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
     Uri imageUri;
@@ -41,12 +43,14 @@ public class VotePage extends AppCompatActivity {
         Button back = findViewById(R.id.back);
         ListView sentaku = findViewById(R.id.sentakusi);
 
-
+        notH = findViewById(R.id.notH);
+        notP = findViewById(R.id.notP);
 
 
         pref = PreferenceManager.getDefaultSharedPreferences(this);
         Intent intentmain = new Intent(this, MainActivity.class);
         Intent coment = new Intent(this, Comment.class);
+        Intent intentP = new Intent(this, SelfPage.class);
         Intent intent = getIntent();
 
         showTitle = findViewById(R.id.taitoru);
@@ -81,6 +85,18 @@ public class VotePage extends AppCompatActivity {
             }
         });
 
+        notH.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(intentmain);
+            }
+        });
+        notP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(intentP);
+            }
+        });
 
     }
 
