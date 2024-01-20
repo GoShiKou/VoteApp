@@ -77,7 +77,6 @@ public class VotePage extends AppCompatActivity {
                 for (int i = 0; i < uriArraySplit.length; i++) {
                     uriArray.add(uriArraySplit[i]);
                 }
-
                 showTitle.setText(titleSplit[selectTitle]);
 
                 if (uriArraySplit[selectTitle] != null && !uriArraySplit[selectTitle].isEmpty()) {
@@ -135,33 +134,33 @@ public class VotePage extends AppCompatActivity {
 
         return new ArrayList<>(detaSet);
     }
-    private void removeTodoItem(SharedPreferences pref, SharedPreferences.Editor editor, int position) {
-
-        String str_titles = pref.getString("title", "");
-        String[] list = str_titles.split(",");
-
-        ArrayList<String> titleList = new ArrayList<>();
-        for (int i = 0; i < list.length; i++) {
-            titleList.add(list[i]);
-        }
-
-        String pref_images = pref.getString("image","");
-        String[]imageList = pref_images.split(",");
-        ArrayList<String>imagelist=new ArrayList<>();
-        for(int i=0;i<imageList.length;i++){
-            imagelist.add(imageList[i]);
-        }
-        if (position < titleList.size()) {
-            editor.remove("title");
-            editor.remove("image");
-
-
-            editor.putString("title", arrayToString(titleList));
-            editor.putString("image",arrayToString(imagelist));
-            editor.apply();
-
-        }
-    }
+//    private void removeTodoItem(SharedPreferences pref, SharedPreferences.Editor editor, int position) {
+//
+//        String str_titles = pref.getString("title", "");
+//        String[] list = str_titles.split(",");
+//
+//        ArrayList<String> titleList = new ArrayList<>();
+//        for (int i = 0; i < list.length; i++) {
+//            titleList.add(list[i]);
+//        }
+//
+//        String pref_images = pref.getString("image","");
+//        String[]imageList = pref_images.split(",");
+//        ArrayList<String>imagelist=new ArrayList<>();
+//        for(int i=0;i<imageList.length;i++){
+//            imagelist.add(imageList[i]);
+//        }
+//        if (position < titleList.size()) {
+//            editor.remove("title");
+//            editor.remove("image");
+//
+//
+//            editor.putString("title", arrayToString(titleList));
+//            editor.putString("image",arrayToString(imagelist));
+//            editor.apply();
+//
+//        }
+//    }
 
 
     private String arrayToString(ArrayList<String> title) {
