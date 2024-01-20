@@ -30,22 +30,37 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        String str_title = pref.getString("title", "");
-        titleList.clear();
-        if (str_title != null && !str_title.equals("")) {
-            String[] List = str_title.split(",");
+//        String str_title = pref.getString("title", "");
+//        titleList.clear();
+//        if (str_title != null && !str_title.equals("")) {
+//            String[] List = str_title.split(",");
+//
+//            for (int i = 0; i < List.length; i++) {
+//                titleList.add(List[i]);
+//            }
+//        }
+//        voteList.setAdapter(adapter);
 
-            for (int i = 0; i < List.length; i++) {
-                titleList.add(List[i]);
-            }
+        String addedTitle = pref.getString("title", null);
+
+        titleList = new ArrayList<>();
+        String[] titleSplit = addedTitle.split(",");
+        for (int i = 0; i < titleSplit.length; i++) {
+            titleList.add(titleSplit[i]);
         }
+
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, titleList);
         voteList.setAdapter(adapter);
+
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
+        editor = pref.edit();
 
         Intent createPage = new Intent(this, CreatePage.class);
         Intent votePage = new Intent(this, VotePage.class);
@@ -56,8 +71,6 @@ public class MainActivity extends AppCompatActivity {
         titleList = new ArrayList<>();
         ImageView profile = findViewById(R.id.profileImageI);
 
-        pref = PreferenceManager.getDefaultSharedPreferences(this);
-        editor = pref.edit();
         String str_title = pref.getString("title", "");
         if (str_title != null && !str_title.equals("")) {
             String[] List = str_title.split(",");
@@ -99,27 +112,29 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //リストクリック処理
 
-                String title =(String) adapterView.getItemAtPosition(i);
-                votePage.putExtra("title",title);
+//                String title =(String) adapterView.getItemAtPosition(i);
+//                votePage.putExtra("title",title);
+//
+//                String str_contents = pref.getString("content","");
+//                String[] memotList = str_contents.split(",");
+//                System.out.println("ListActivity.onItemClick:"+i);
+//
+//                for(String s:memotList){
+//                    System.out.println("ListActivity.onItemClick:"+title+"_"+s);
+//                }
+//
+////                for(int lp=0;lp< memotList.length;lp++){
+////                    System.out.printf("memotList[%d] : %s\n",lp,memotList[lp]);
+////                }
+//
+//                votePage.putExtra("content",memotList[i]);
+//
+//                String str_images = pref.getString("image","");
+//                String[]imageList = str_images.split(",");
+//                votePage.putExtra("image",imageList[i]);
+//                votePage.putExtra("selecteditemPositon",i);
 
-                String str_contents = pref.getString("content","");
-                String[] memotList = str_contents.split(",");
-                System.out.println("ListActivity.onItemClick:"+i);
-
-                for(String s:memotList){
-                    System.out.println("ListActivity.onItemClick:"+title+"_"+s);
-                }
-
-                for(int lp=0;lp< memotList.length;lp++){
-                    System.out.printf("memotList[%d] : %s\n",lp,memotList[lp]);
-                }
-
-                votePage.putExtra("content",memotList[i]);
-
-                String str_images = pref.getString("image","");
-                String[]imageList = str_images.split(",");
-                votePage.putExtra("image",imageList[i]);
-                votePage.putExtra("selecteditemPositon",i);
+                votePage.putExtra("selectedTitle", i);
 
                 startActivity(votePage);
 

@@ -12,6 +12,8 @@ import android.widget.TextView;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.net.Uri;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -39,29 +41,55 @@ public class VotePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_votepage);
 
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
+        editor = pref.edit();
+
+        String titleString = pref.getString("title", null);
+        String uriString = pref.getString("image", null);
+
         Button koment = findViewById(R.id.Comment);
         Button back = findViewById(R.id.back);
         ListView sentaku = findViewById(R.id.sentakusi);
+        showTitle = findViewById(R.id.taitoru);
+        showImage = findViewById(R.id.imageView);
 
         notH = findViewById(R.id.notH);
         notP = findViewById(R.id.notP);
 
-
-        pref = PreferenceManager.getDefaultSharedPreferences(this);
         Intent intentmain = new Intent(this, MainActivity.class);
         Intent coment = new Intent(this, Comment.class);
         Intent intentP = new Intent(this, SelfPage.class);
+
         Intent intent = getIntent();
+        int selectTitle = intent.getIntExtra("selectedTitle", -1);
 
-        showTitle = findViewById(R.id.taitoru);
-        String title = intent.getStringExtra("title");
-        showTitle.setText(title);
+        ArrayList<String> titleList = new ArrayList<>();
+        ArrayList<String> uriArray = new ArrayList<>();
 
-        showImage = findViewById(R.id.imageView);
-        String image = intent.getStringExtra("image");
-        Uri imageUri= Uri.parse(image);
-        showImage.setImageURI(imageUri);
+        if (titleString != null && uriString != null) {
+            if (!titleString.isEmpty() && !uriString.isEmpty()) {
+                String[] titleSplit = titleString.split(",");
+                String[] uriArraySplit = uriString.split(",");
 
+                for (int i = 0; i < titleSplit.length; i++) {
+                    titleList.add(titleSplit[i]);
+                }
+                for (int i = 0; i < uriArraySplit.length; i++) {
+                    uriArray.add(uriArraySplit[i]);
+                }
+
+                showTitle.setText(titleSplit[selectTitle]);
+
+                if (uriArraySplit[selectTitle] != null && !uriArraySplit[selectTitle].isEmpty()) {
+                    showImage.setImageURI(Uri.parse(uriArraySplit[selectTitle]));
+                }
+
+            }
+        }
+
+
+
+        //
         ArrayList<String> retrivedlist = getDataFromSharedPreferences();
 
         ArrayAdapter<String> adapter =new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,retrivedlist);
@@ -74,7 +102,8 @@ public class VotePage extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                //finish();
+                startActivity(intentmain);
             }
         });
         //コメントページ
