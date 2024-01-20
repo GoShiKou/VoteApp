@@ -77,6 +77,7 @@ public class VotePage extends AppCompatActivity {
                 for (int i = 0; i < uriArraySplit.length; i++) {
                     uriArray.add(uriArraySplit[i]);
                 }
+
                 showTitle.setText(titleSplit[selectTitle]);
 
                 if (uriArraySplit[selectTitle] != null && !uriArraySplit[selectTitle].isEmpty()) {
@@ -161,13 +162,13 @@ public class VotePage extends AppCompatActivity {
 //
 //        }
 //    }
-
-
-    private String arrayToString(ArrayList<String> title) {
-        StringBuilder sb = new StringBuilder();
-        for (String s : title) {
-            sb.append(s).append(",");
-        }
-        return sb.toString().replaceAll("$", "");
-    }
+//
+//
+//    private String arrayToString(ArrayList<String> title) {
+//        StringBuilder sb = new StringBuilder();
+//        for (String s : title) {
+//            sb.append(s).append(",");
+//        }
+//        return sb.toString().replaceAll("$", "");
+//    }
 }
