@@ -30,6 +30,7 @@ public class VotePage extends AppCompatActivity {
     ImageView showImage;
     ImageView notH;
     ImageView notP;
+    ImageView XImage;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
     Uri imageUri;
@@ -126,6 +127,15 @@ public class VotePage extends AppCompatActivity {
                 startActivity(intentP);
             }
         });
+        XImage= findViewById(R.id.XImage);
+        XImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
 
     }
 
