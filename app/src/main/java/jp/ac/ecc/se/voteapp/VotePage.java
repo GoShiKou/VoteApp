@@ -110,6 +110,7 @@ public class VotePage extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("listData",MODE_PRIVATE);
         Set<String> detaSet = preferences.getStringSet("listData",new HashSet<>());
 
+
         return new ArrayList<>(detaSet);
     }
     private void removeTodoItem(SharedPreferences pref, SharedPreferences.Editor editor, int position) {
