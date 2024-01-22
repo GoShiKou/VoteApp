@@ -141,9 +141,6 @@ public class CreatePage extends AppCompatActivity {
 //                if(!taitoru.getText().toString().isEmpty()) {
 //                    Intent intent_List = new Intent(CreatePage.this, MainActivity.class);
 //
-//                    // SharedPreferencesにデータを保存
-//                    saveDataToSharedPreferences(datalist);
-//
 //                    String str_title = taitoru.getText().toString();
 //                    tdTitleList.add(str_title);
 //                    String str_titles = String.join(",", tdTitleList);
@@ -201,6 +198,10 @@ public class CreatePage extends AppCompatActivity {
 
                         editor.apply();
                     }
+
+                    // SharedPreferencesにデータを保存
+                    saveDataToSharedPreferences(datalist);
+
                     finish();
                 }
 
