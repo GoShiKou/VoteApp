@@ -30,6 +30,8 @@ public class VotePage extends AppCompatActivity {
     ImageView showImage;
     ImageView notH;
     ImageView notP;
+
+    ImageView XImage;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
     Uri imageUri;
@@ -127,6 +129,15 @@ public class VotePage extends AppCompatActivity {
             }
         });
 
+        //Xbutton
+        XImage=findViewById(R.id.XImage);
+        XImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
     }
 
     private ArrayList<String> getDataFromSharedPreferences() {
@@ -136,6 +147,11 @@ public class VotePage extends AppCompatActivity {
 
         return new ArrayList<>(detaSet);
     }
+
+
+
+
+
 //    private void removeTodoItem(SharedPreferences pref, SharedPreferences.Editor editor, int position) {
 //
 //        String str_titles = pref.getString("title", "");
