@@ -13,4 +13,5 @@
     <string name="check">投票確定</string>
     <string name="CommentNumber">Comment</string>
     <string name="EmojiNumber">Emoji</string>
+    <string name="EmojiNum">Like</string>
 </resources>
