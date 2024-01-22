@@ -88,9 +88,6 @@ public class VotePage extends AppCompatActivity {
             }
         }
 
-
-
-        //
         ArrayList<String> retrivedlist = getDataFromSharedPreferences();
 
         ArrayAdapter<String> adapter =new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,retrivedlist);

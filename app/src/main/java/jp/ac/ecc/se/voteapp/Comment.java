@@ -12,7 +12,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -20,6 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Comment extends AppCompatActivity {
 
@@ -57,10 +57,11 @@ public class Comment extends AppCompatActivity {
         commentList = new ArrayList<>();
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_activated_1, commentList);
 
-        ImageView Image3 = findViewById(R.id.Image3);
-        String image = intent.getStringExtra("image");
-        Uri imageUri = Uri.parse(image);
-        Image3.setImageURI(imageUri);
+        // Load comments from storage
+        loadCommentsFromStorage();
+
+        // Set the adapter for the ListView
+        MyCommentView.setAdapter(adapter);
 
         CommentButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,8 +83,6 @@ public class Comment extends AppCompatActivity {
                             updateCommentButtonCount();
                             adapter.notifyDataSetChanged();
                             MyCommentView.setAdapter(adapter);
-
-                            // Save the updated commentList to SharedPreferences or any other storage method
                             saveCommentsToStorage(commentList);
                         }
 
@@ -121,10 +120,26 @@ public class Comment extends AppCompatActivity {
     }
 
     private void saveCommentsToStorage(ArrayList<String> comments) {
-
         SharedPreferences.Editor editor = getSharedPreferences("MyPrefs", MODE_PRIVATE).edit();
         editor.putString("commentList", TextUtils.join(",", comments));
         editor.apply();
+    }
+
+    private void loadCommentsFromStorage() {
+        SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        String commentsString = prefs.getString("commentList", "");
+
+        if (!TextUtils.isEmpty(commentsString)) {
+            // Split the stored string into an array of comments
+            String[] commentsArray = commentsString.split(",");
+
+            // Add comments to the commentList
+            commentList.addAll(Arrays.asList(commentsArray));
+
+            // Update any UI components as needed
+            commentButtonCount = commentList.size();
+            updateCommentButtonCount();
+        }
     }
 
     private void updateEmojiButtonCount() {
