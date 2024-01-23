@@ -108,10 +108,20 @@ public class VotePage extends AppCompatActivity {
         koment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(coment);
-            }
-        });
+                Intent commentIntent = new Intent(VotePage.this, Comment.class);
+//
+        // Get the selected title and image URI
+        String selectedTitle = showTitle.getText().toString();
+        String selectedImageUri = uriArray.get(selectTitle);
 
+        // Pass title and image URI to CommentPage
+        commentIntent.putExtra("title", selectedTitle);
+        commentIntent.putExtra("image", selectedImageUri);
+
+        startActivity(commentIntent);
+        }
+        });
+        
         notH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

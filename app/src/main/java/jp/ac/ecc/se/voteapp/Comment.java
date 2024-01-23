@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -36,6 +37,9 @@ public class Comment extends AppCompatActivity {
     int commentButtonCount = 0;
 
     TextView commentTitle;
+    boolean hasLiked = false;
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,12 +54,25 @@ public class Comment extends AppCompatActivity {
         TextView EmojiNumber = findViewById(R.id.EmojiNumber);
         TextView CommentNumber = findViewById(R.id.CommentNumber);
 
+        commentTitle = findViewById(R.id.commentTitle);
+        ImageView Image3 = findViewById(R.id.Image3);
+
+
+
         Intent intent = getIntent();
         String title = intent.getStringExtra("title");
         commentTitle.setText(title);
 
+
+
+        String image = intent.getStringExtra("image");
+        Uri imageUri = Uri.parse(image);
+        Image3.setImageURI(imageUri);
+
         commentList = new ArrayList<>();
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_activated_1, commentList);
+
+
 
         // Load comments from storage
         loadCommentsFromStorage();
@@ -113,8 +130,10 @@ public class Comment extends AppCompatActivity {
         EmojiButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                emojiButtonCount++;
-                updateEmojiButtonCount();
+//                emojiButtonCount++;
+//                updateEmojiButtonCount();
+                hasLiked = !hasLiked;
+             updateEmojiButtonCount();
             }
         });
     }
@@ -130,9 +149,7 @@ public class Comment extends AppCompatActivity {
         String commentsString = prefs.getString("commentList", "");
 
         if (!TextUtils.isEmpty(commentsString)) {
-            // Split the stored string into an array of comments
             String[] commentsArray = commentsString.split(",");
-
             // Add comments to the commentList
             commentList.addAll(Arrays.asList(commentsArray));
 
@@ -142,13 +159,30 @@ public class Comment extends AppCompatActivity {
         }
     }
 
-    private void updateEmojiButtonCount() {
-        TextView emojiNumberView = findViewById(R.id.EmojiNumber);
-        emojiNumberView.setText("Like " + emojiButtonCount);
-    }
+//    private void updateEmojiButtonCount() {
+//        TextView emojiNumberView = findViewById(R.id.EmojiNumber);
+//        emojiNumberView.setText("Like " + emojiButtonCount);
+//    }
 
     private void updateCommentButtonCount() {
         TextView commentNumberView = findViewById(R.id.CommentNumber);
         commentNumberView.setText(" Comments " + commentButtonCount);
     }
+
+    private void updateEmojiButtonCount() {
+       TextView emojiNumberView = findViewById(R.id.EmojiNumber);
+
+        // Check the state and update the UI accordingly
+        if (hasLiked) {
+           emojiButtonCount++;
+        } else {
+            emojiButtonCount--;
+        }
+
+       // Set the updated count in the TextView
+       emojiNumberView.setText("Like " + emojiButtonCount);
+  }
 }
+
+
+
