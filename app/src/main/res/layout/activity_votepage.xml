@@ -35,14 +35,15 @@
 
     <TextView
         android:id="@+id/taitoru"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_width="309dp"
+        android:layout_height="55dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="100dp"
         android:layout_marginBottom="8dp"
         android:gravity="clip_horizontal|left|center_vertical"
         android:text="title"
+        android:textSize="40dp"
         app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +52,7 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="0dp"
-        android:layout_height="128dp"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -103,7 +104,7 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/notH"
+                        android:id="@+id/PtoH"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_gravity="center"
@@ -128,7 +129,7 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/notP"
+                        android:id="@+id/myP"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_gravity="center"

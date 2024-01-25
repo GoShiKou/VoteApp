@@ -48,7 +48,8 @@ public class SelfPage extends AppCompatActivity {
         selfVote = findViewById(R.id.selfvote);
         ImageView img = findViewById(R.id.selfie);
         TextView text = findViewById(R.id.selfInfo);
-        Button back = findViewById(R.id.backBtn);
+        ImageView homePG = findViewById(R.id.PtoH);
+
         Intent vtpg = new Intent(this, VotePage.class);
 //
         // starting profile data
@@ -61,8 +62,8 @@ public class SelfPage extends AppCompatActivity {
         text.setText(introduction);
 
         pref = PreferenceManager.getDefaultSharedPreferences(this);
-        if(!pref.getString("title","").isEmpty()) {
-            String[] titleSprit = pref.getString("title", "").split(",");
+        if(!pref.getString("list","").isEmpty()) {
+            String[] titleSprit = pref.getString("list", "").split(",");
             titlelist.addAll(Arrays.asList(titleSprit));
         }
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_activated_1, titlelist);
@@ -72,28 +73,21 @@ public class SelfPage extends AppCompatActivity {
         selfVote.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long id) {
-                String title =(String) adapterView.getItemAtPosition(i);
-                vtpg.putExtra("title", title);
-                String str_contents = pref.getString("content","");
-                String[] memotList = str_contents.split(",");
-                System.out.println("ListActivity.onItemClick:"+i);
+                //リストクリック処理
 
-                for(String s:memotList){
-                    System.out.println("ListActivity.onItemClick:"+title+"_"+s);
-                }
+                vtpg.putExtra("selectedTitle", i);
 
-                for(int lp=0;lp< memotList.length;lp++){
-                    System.out.printf("memotList[%d] : %s\n",lp,memotList[lp]);
-                }
                 startActivity(vtpg);
+
             }
         });
 //
         // back to previous page
-        back.setOnClickListener(new View.OnClickListener() {
+        homePG.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Intent intent = new Intent(SelfPage.this, MainActivity.class);
+                startActivity(intent);
             }
         });
     }
