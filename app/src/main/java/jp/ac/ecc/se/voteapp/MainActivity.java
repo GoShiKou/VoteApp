@@ -18,12 +18,13 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_CREATE_NOTE = 1;
-    ArrayList<String> titleList;
+    public static ArrayList<String> titleList = new ArrayList<>();
     ArrayAdapter<String> adapter;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
@@ -32,24 +33,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-//        String str_title = pref.getString("title", "");
-//        titleList.clear();
-//        if (str_title != null && !str_title.equals("")) {
-//            String[] List = str_title.split(",");
-//
-//            for (int i = 0; i < List.length; i++) {
-//                titleList.add(List[i]);
-//            }
-//        }
-//        voteList.setAdapter(adapter);
-
-        String addedTitle = pref.getString("title", null);
-
-        titleList = new ArrayList<>();
-        String[] titleSplit = addedTitle.split(",");
-        for (int i = 0; i < titleSplit.length; i++) {
-            titleList.add(titleSplit[i]);
-        }
 
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, titleList);
         voteList.setAdapter(adapter);
@@ -82,6 +65,13 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+        if(!pref.getString("list","").isEmpty()) {
+            String[] titleSprit = pref.getString("list", "").split(",");
+            titleList.addAll(Arrays.asList(titleSprit));
+        }
+        ArrayAdapter<String> adapter2 = new ArrayAdapter(this, android.R.layout.simple_list_item_1, titleList);
+        voteList.setAdapter(adapter2);
+
         //アダプター
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_activated_1, titleList);
         voteList.setAdapter(adapter);
@@ -104,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         voteCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(createPage, 1234);
+                startActivity(createPage);
             }
         });
 
@@ -114,31 +104,8 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //リストクリック処理
 
-//                String title =(String) adapterView.getItemAtPosition(i);
-//                votePage.putExtra("title",title);
-//
-//                String str_contents = pref.getString("content","");
-//                String[] memotList = str_contents.split(",");
-//                System.out.println("ListActivity.onItemClick:"+i);
-//
-//                for(String s:memotList){
-//                    System.out.println("ListActivity.onItemClick:"+title+"_"+s);
-//                }
-//
-////                for(int lp=0;lp< memotList.length;lp++){
-////                    System.out.printf("memotList[%d] : %s\n",lp,memotList[lp]);
-////                }
-//
-//                votePage.putExtra("content",memotList[i]);
-//
-//                String str_images = pref.getString("image","");
-//                String[]imageList = str_images.split(",");
-//                votePage.putExtra("image",imageList[i]);
-//                votePage.putExtra("selecteditemPositon",i);
-
                 votePage.putExtra("selectedTitle", i);
                 startActivity(votePage);
-
             }
         });
 
@@ -151,6 +118,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(toProfile);
             }
         });
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ListView todoListView = findViewById(R.id.voteList);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter(this, android.R.layout.simple_list_item_1, titleList);
+        todoListView.setAdapter(adapter2);
     }
 }

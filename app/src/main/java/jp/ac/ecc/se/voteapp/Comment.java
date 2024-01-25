@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -20,7 +21,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Comment extends AppCompatActivity {
 
@@ -37,15 +37,16 @@ public class Comment extends AppCompatActivity {
     int commentButtonCount = 0;
 
     TextView commentTitle;
-    boolean hasLiked = false;
-
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
 
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
+        editor = pref.edit();
+
+        ImageView image = findViewById(R.id.Image3);
         commentTitle = findViewById(R.id.commentTitle);
         ImageButton EmojiButton = findViewById(R.id.EmojiButton);
         Button Back2 = findViewById(R.id.Back2);
@@ -54,31 +55,28 @@ public class Comment extends AppCompatActivity {
         TextView EmojiNumber = findViewById(R.id.EmojiNumber);
         TextView CommentNumber = findViewById(R.id.CommentNumber);
 
-        commentTitle = findViewById(R.id.commentTitle);
-        ImageView Image3 = findViewById(R.id.Image3);
 
-
-
-        Intent intent = getIntent();
-        String title = intent.getStringExtra("title");
-        commentTitle.setText(title);
-
-
-
-        String image = intent.getStringExtra("image");
-        Uri imageUri = Uri.parse(image);
-        Image3.setImageURI(imageUri);
+//        String title = intent.getStringExtra("title");
+//        commentTitle.setText(title);
 
         commentList = new ArrayList<>();
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_activated_1, commentList);
 
+//        ImageView Image3 = findViewById(R.id.Image3);
+//        String image = intent.getStringExtra("image");
+//        Uri imageUri = Uri.parse(image);
+//        Image3.setImageURI(imageUri);
 
+        Intent intent = getIntent();
 
-        // Load comments from storage
-        loadCommentsFromStorage();
+        int selectTitle = intent.getIntExtra("selectedTitle", -1);
+//        String list = MainActivity.titleList.get(selectTitle);
 
-        // Set the adapter for the ListView
-        MyCommentView.setAdapter(adapter);
+        String titleString = pref.getString("title", "");
+        String uriString = pref.getString("image", "");
+        Uri Imageuri = Uri.parse(uriString);
+        commentTitle.setText(titleString);
+        image.setImageURI(Imageuri);
 
         CommentButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,6 +98,8 @@ public class Comment extends AppCompatActivity {
                             updateCommentButtonCount();
                             adapter.notifyDataSetChanged();
                             MyCommentView.setAdapter(adapter);
+
+                            // Save the updated commentList to SharedPreferences or any other storage method
                             saveCommentsToStorage(commentList);
                         }
 
@@ -122,67 +122,34 @@ public class Comment extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Comment.this, VotePage.class);
-                startActivity(intent);
-                // finish();
+//                startActivity(intent);
+                 finish();
             }
         });
 
         EmojiButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                emojiButtonCount++;
-//                updateEmojiButtonCount();
-                hasLiked = !hasLiked;
-             updateEmojiButtonCount();
+                emojiButtonCount++;
+                updateEmojiButtonCount();
             }
         });
     }
 
     private void saveCommentsToStorage(ArrayList<String> comments) {
+
         SharedPreferences.Editor editor = getSharedPreferences("MyPrefs", MODE_PRIVATE).edit();
         editor.putString("commentList", TextUtils.join(",", comments));
         editor.apply();
     }
 
-    private void loadCommentsFromStorage() {
-        SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-        String commentsString = prefs.getString("commentList", "");
-
-        if (!TextUtils.isEmpty(commentsString)) {
-            String[] commentsArray = commentsString.split(",");
-            // Add comments to the commentList
-            commentList.addAll(Arrays.asList(commentsArray));
-
-            // Update any UI components as needed
-            commentButtonCount = commentList.size();
-            updateCommentButtonCount();
-        }
+    private void updateEmojiButtonCount() {
+        TextView emojiNumberView = findViewById(R.id.EmojiNumber);
+        emojiNumberView.setText("Like " + emojiButtonCount);
     }
-
-//    private void updateEmojiButtonCount() {
-//        TextView emojiNumberView = findViewById(R.id.EmojiNumber);
-//        emojiNumberView.setText("Like " + emojiButtonCount);
-//    }
 
     private void updateCommentButtonCount() {
         TextView commentNumberView = findViewById(R.id.CommentNumber);
         commentNumberView.setText(" Comments " + commentButtonCount);
     }
-
-    private void updateEmojiButtonCount() {
-       TextView emojiNumberView = findViewById(R.id.EmojiNumber);
-
-        // Check the state and update the UI accordingly
-        if (hasLiked) {
-           emojiButtonCount++;
-        } else {
-            emojiButtonCount--;
-        }
-
-       // Set the updated count in the TextView
-       emojiNumberView.setText("Like " + emojiButtonCount);
-  }
 }
-
-
-
