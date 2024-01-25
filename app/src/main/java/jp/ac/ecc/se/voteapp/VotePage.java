@@ -32,7 +32,11 @@ public class VotePage extends AppCompatActivity {
     SharedPreferences pref;
     SharedPreferences.Editor editor;
     Uri imageUri;
+    boolean hasVoted = false;
 
+    public void setHasVoted(boolean hasVoted) {
+        this.hasVoted = hasVoted;
+    }
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -43,63 +47,69 @@ public class VotePage extends AppCompatActivity {
         pref = PreferenceManager.getDefaultSharedPreferences(this);
         editor = pref.edit();
 
-        String titleString = pref.getString("title", null);
-        String uriString = pref.getString("image", null);
-
         Button koment = findViewById(R.id.Comment);
         Button back = findViewById(R.id.back);
         ListView sentaku = findViewById(R.id.sentakusi);
         showTitle = findViewById(R.id.taitoru);
         showImage = findViewById(R.id.imageView);
 
-        notH = findViewById(R.id.notH);
-        notP = findViewById(R.id.notP);
+        notH = findViewById(R.id.PtoH);
+        notP = findViewById(R.id.myP);
 
         Intent intentmain = new Intent(this, MainActivity.class);
         Intent coment = new Intent(this, Comment.class);
         Intent intentP = new Intent(this, SelfPage.class);
 
-        Intent intent = getIntent();
-        int selectTitle = intent.getIntExtra("selectedTitle", -1);
-
         ArrayList<String> titleList = new ArrayList<>();
         ArrayList<String> uriArray = new ArrayList<>();
 
-        if (titleString != null && uriString != null) {
-            if (!titleString.isEmpty() && !uriString.isEmpty()) {
-                String[] titleSplit = titleString.split(",");
-                String[] uriArraySplit = uriString.split(",");
+        Intent intent = getIntent();
 
-                for (int i = 0; i < titleSplit.length; i++) {
-                    titleList.add(titleSplit[i]);
-                }
-                for (int i = 0; i < uriArraySplit.length; i++) {
-                    uriArray.add(uriArraySplit[i]);
-                }
+        int selectTitle = intent.getIntExtra("selectedTitle", -1);
+        String list = MainActivity.titleList.get(selectTitle);
 
-                showTitle.setText(titleSplit[selectTitle]);
-
-                if (uriArraySplit[selectTitle] != null && !uriArraySplit[selectTitle].isEmpty()) {
-                    showImage.setImageURI(Uri.parse(uriArraySplit[selectTitle]));
-                }
-
-            }
-        }
-
+        String titleString = pref.getString(list + "title", "");
+        String voteString = pref.getString(list + "vote", "");
+        String uriString = pref.getString(list + "uri", "");
+        Uri Imageuri = Uri.parse(uriString);
+        showTitle.setText(titleString);
+        showImage.setImageURI(Imageuri);
         ArrayList<String> retrivedlist = getDataFromSharedPreferences();
 
         ArrayAdapter<String> adapter =new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,retrivedlist);
         sentaku.setAdapter(adapter);
 
+        sentaku.setOnItemClickListener((parent, view, position, id) -> {
+            // 例えば、選択された項目のテキストを取得
+            String selectedOption = retrivedlist.get(position);
 
-        //Intent intent = new Intent(this, Comment.class);
+            if (!hasVoted) {
+                // ここに投票の処理を追加
+                // 例えば、選択された項目に対する投票を記録するなど
+
+                // 投票回数を取得し、1回増やす
+                int voteCount = pref.getInt(selectedOption, 0) + 1;
+
+                // 投票回数をSharedPreferencesに保存
+                editor.putInt(selectedOption, voteCount);
+                editor.apply();
+
+                // 投票回数を表示するためにListViewを更新
+                retrivedlist.set(position, selectedOption +
+                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" +
+                        "  票数: " + voteCount);
+                adapter.notifyDataSetChanged();
+
+                setHasVoted(true);
+            }
+        });
 
         //前のページに戻る
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //finish();
-                startActivity(intentmain);
+                finish();
+//                startActivity(intentmain);
             }
         });
         //コメントページ
@@ -107,19 +117,18 @@ public class VotePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent commentIntent = new Intent(VotePage.this, Comment.class);
-//
-        // Get the selected title and image URI
-        String selectedTitle = showTitle.getText().toString();
-        String selectedImageUri = uriArray.get(selectTitle);
 
-        // Pass title and image URI to CommentPage
-        commentIntent.putExtra("title", selectedTitle);
-        commentIntent.putExtra("image", selectedImageUri);
+                // Get the selected title and image URI
+                String selectedTitle = showTitle.getText().toString();
+//                String selectedImageUri = uriArray.get(selectTitle);
 
-        startActivity(commentIntent);
-        }
+                // Pass title and image URI to CommentPage
+                commentIntent.putExtra(list + "title", selectedTitle);
+
+                startActivity(commentIntent);
+            }
         });
-        
+
         notH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,88 +142,33 @@ public class VotePage extends AppCompatActivity {
             }
         });
         XImage= findViewById(R.id.XImage);
-        // VotePageからMainPageに戻る
-        Intent Mainintent = new Intent(VotePage.this, MainActivity.class);
         XImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                titleList.remove(selectTitle);
-                uriArray.remove(selectTitle);
-                retrivedlist.remove(selectTitle);
-                editor.apply();
-
-                String titleString = String.join(",",titleList);
-                editor.putString("title",titleString);
-                //editor.apply();
-
-                String uriString = String.join(",",uriArray);
-                editor.putString("image", uriString);
-                editor.apply();
-
-                String listString = String.join(",",retrivedlist);
-                editor.putString("list",listString);
-                editor.apply();
-
-
-
-                finish(); // VotePageを終了
-
-                //startActivity(Mainintent);
-
-//                retrivedlist.clear();
-//                adapter.notifyDataSetChanged();
-//                sentaku.setVisibility(View.GONE);
-//                showTitle.setVisibility(View.GONE);
-//                showImage.setVisibility(View.GONE);
 
             }
         });
-
-
-
     }
 
     private ArrayList<String> getDataFromSharedPreferences() {
-        SharedPreferences preferences = getSharedPreferences("listData",MODE_PRIVATE);
-        Set<String> detaSet = preferences.getStringSet("listData",new HashSet<>());
-
+        String title = showTitle.getText().toString();
+        SharedPreferences preferences = getSharedPreferences(title + "listData",MODE_PRIVATE);
+        Set<String> detaSet = preferences.getStringSet(title + "listData",new HashSet<>());
 
         return new ArrayList<>(detaSet);
     }
-//    private void removeTodoItem(SharedPreferences pref, SharedPreferences.Editor editor, int position) {
-//
-//        String str_titles = pref.getString("title", "");
-//        String[] list = str_titles.split(",");
-//
-//        ArrayList<String> titleList = new ArrayList<>();
-//        for (int i = 0; i < list.length; i++) {
-//            titleList.add(list[i]);
-//        }
-//
-//        String pref_images = pref.getString("image","");
-//        String[]imageList = pref_images.split(",");
-//        ArrayList<String>imagelist=new ArrayList<>();
-//        for(int i=0;i<imageList.length;i++){
-//            imagelist.add(imageList[i]);
-//        }
-//        if (position < titleList.size()) {
-//            editor.remove("title");
-//            editor.remove("image");
-//
-//
-//            editor.putString("title", arrayToString(titleList));
-//            editor.putString("image",arrayToString(imagelist));
-//            editor.apply();
-//
-//        }
-//    }
-//
-//
-//    private String arrayToString(ArrayList<String> title) {
-//        StringBuilder sb = new StringBuilder();
-//        for (String s : title) {
-//            sb.append(s).append(",");
-//        }
-//        return sb.toString().replaceAll("$", "");
-//    }
+    @Override
+    protected void onResume() {
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+        super.onResume();
+        Intent intent = getIntent();
+        int selectTitle = intent.getIntExtra("selectedTitle",-1);
+        String list = MainActivity.titleList.get(selectTitle);
+
+        String titleTxt = pref.getString(list + "title","");
+        String uri = pref.getString(list + "uri","");
+        Uri Imageuri = Uri.parse(uri);
+        showTitle.setText(titleTxt);
+        showImage.setImageURI(Imageuri);
+    }
 }
