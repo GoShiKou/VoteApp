@@ -23,8 +23,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-
-
 public class VotePage extends AppCompatActivity {
     TextView showTitle;
     ImageView showImage;
@@ -135,9 +133,39 @@ public class VotePage extends AppCompatActivity {
             }
         });
         XImage= findViewById(R.id.XImage);
+        // VotePageからMainPageに戻る
+        Intent Mainintent = new Intent(VotePage.this, MainActivity.class);
         XImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                titleList.remove(selectTitle);
+                uriArray.remove(selectTitle);
+                retrivedlist.remove(selectTitle);
+                editor.apply();
+
+                String titleString = String.join(",",titleList);
+                editor.putString("title",titleString);
+                //editor.apply();
+
+                String uriString = String.join(",",uriArray);
+                editor.putString("image", uriString);
+                editor.apply();
+
+                String listString = String.join(",",retrivedlist);
+                editor.putString("list",listString);
+                editor.apply();
+
+
+
+                finish(); // VotePageを終了
+
+                //startActivity(Mainintent);
+
+//                retrivedlist.clear();
+//                adapter.notifyDataSetChanged();
+//                sentaku.setVisibility(View.GONE);
+//                showTitle.setVisibility(View.GONE);
+//                showImage.setVisibility(View.GONE);
 
             }
         });

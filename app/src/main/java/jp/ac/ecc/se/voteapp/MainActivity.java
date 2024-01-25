@@ -137,7 +137,6 @@ public class MainActivity extends AppCompatActivity {
 //                votePage.putExtra("selecteditemPositon",i);
 
                 votePage.putExtra("selectedTitle", i);
-
                 startActivity(votePage);
 
             }
