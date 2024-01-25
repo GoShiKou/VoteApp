@@ -105,7 +105,6 @@ public class MainActivity extends AppCompatActivity {
                 //リストクリック処理
 
                 votePage.putExtra("selectedTitle", i);
-
                 startActivity(votePage);
             }
         });
