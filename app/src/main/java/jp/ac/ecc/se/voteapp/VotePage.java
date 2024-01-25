@@ -76,13 +76,11 @@ public class VotePage extends AppCompatActivity {
                 for (int i = 0; i < uriArraySplit.length; i++) {
                     uriArray.add(uriArraySplit[i]);
                 }
-
                 showTitle.setText(titleSplit[selectTitle]);
 
                 if (uriArraySplit[selectTitle] != null && !uriArraySplit[selectTitle].isEmpty()) {
                     showImage.setImageURI(Uri.parse(uriArraySplit[selectTitle]));
                 }
-
             }
         }
 
@@ -142,7 +140,7 @@ public class VotePage extends AppCompatActivity {
                 uriArray.remove(selectTitle);
                 retrivedlist.remove(selectTitle);
                 editor.apply();
-
+                
                 String titleString = String.join(",",titleList);
                 editor.putString("title",titleString);
                 //editor.apply();
@@ -154,6 +152,8 @@ public class VotePage extends AppCompatActivity {
                 String listString = String.join(",",retrivedlist);
                 editor.putString("list",listString);
                 editor.apply();
+                adapter.notifyDataSetChanged();
+
 
 
 
