@@ -319,7 +319,8 @@ public class Comment extends AppCompatActivity {
         Intent intent = getIntent();
         int selectTitle = intent.getIntExtra("selectedTitle", -1);
         String title = MainActivity.titleList.get(selectTitle);
-        SharedPreferences.Editor editor = getSharedPreferences(title + "commentList" , MODE_PRIVATE).edit();
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = pref.edit();
         editor.putString(title +"commentList", TextUtils.join(",", comments));
         editor.apply();
     }
@@ -328,7 +329,8 @@ public class Comment extends AppCompatActivity {
         Intent intent = getIntent();
         int selectTitle = intent.getIntExtra("selectedTitle", -1);
         String title = MainActivity.titleList.get(selectTitle);
-        SharedPreferences pref = getSharedPreferences(title + "commentList", MODE_PRIVATE);
+//        SharedPreferences pref = getSharedPreferences(title + "commentList", MODE_PRIVATE);
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         String commentsString = pref.getString(title +"commentList", "");
         String[] commentsArray = commentsString.split(",");
         commentList.addAll(Arrays.asList(commentsArray));
