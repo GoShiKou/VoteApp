@@ -108,7 +108,6 @@ public class CreatePage extends AppCompatActivity {
             public void onClick(View v) {
                 SharedPreferences.Editor editor = pref.edit();
                 String title = taitoru.getText().toString();
-//                String cont = editCon.getText().toString();
                 if (!taitoru.getText().toString().isEmpty()) {
                     if (selectTitle == -1) {
                         MainActivity.titleList.add(taitoru.getText().toString());
