@@ -21,6 +21,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Comment extends AppCompatActivity {
 
@@ -55,28 +56,35 @@ public class Comment extends AppCompatActivity {
         TextView EmojiNumber = findViewById(R.id.EmojiNumber);
         TextView CommentNumber = findViewById(R.id.CommentNumber);
 
+        Intent intent = getIntent();
+//        int selectTitle = intent.getIntExtra("selectedTitle", -1);
+//        String list = MainActivity.titleList.get(selectTitle);
+//        Intent intent = getIntent();
+        int selectTitle = intent.getIntExtra("selectedTitle", -1);
+        String titleString = pref.getString(MainActivity.titleList.get(selectTitle) + "title", "");
+        String uriString = pref.getString(MainActivity.titleList.get(selectTitle) + "uri", "");
+        Uri Imageuri = Uri.parse(uriString);
+        commentTitle.setText(titleString);
+        image.setImageURI(Imageuri);
+
+        commentList = new ArrayList<>();
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, commentList);
+        MyCommentView.setAdapter(adapter);
+
+
+
+//        String titleString = pref.getString(list + "title", "");
+//        String uriString = pref.getString(list + "uri", "");
+//        Uri Imageuri = Uri.parse(uriString);
 
 //        String title = intent.getStringExtra("title");
 //        commentTitle.setText(title);
 
-        commentList = new ArrayList<>();
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_activated_1, commentList);
+//        commentList = new ArrayList<>();
+//        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_activated_1, commentList);
 
-//        ImageView Image3 = findViewById(R.id.Image3);
-//        String image = intent.getStringExtra("image");
-//        Uri imageUri = Uri.parse(image);
-//        Image3.setImageURI(imageUri);
-
-        Intent intent = getIntent();
-
-        int selectTitle = intent.getIntExtra("selectedTitle", -1);
-//        String list = MainActivity.titleList.get(selectTitle);
-
-        String titleString = pref.getString("title", "");
-        String uriString = pref.getString("image", "");
-        Uri Imageuri = Uri.parse(uriString);
-        commentTitle.setText(titleString);
-        image.setImageURI(Imageuri);
+//        commentTitle.setText(titleString);
+//        image.setImageURI(Imageuri);
 
         CommentButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,8 +107,9 @@ public class Comment extends AppCompatActivity {
                             adapter.notifyDataSetChanged();
                             MyCommentView.setAdapter(adapter);
 
+
                             // Save the updated commentList to SharedPreferences or any other storage method
-                            saveCommentsToStorage(commentList);
+                            //saveCommentsToStorage(commentList);
                         }
 
                         dialog.dismiss();
