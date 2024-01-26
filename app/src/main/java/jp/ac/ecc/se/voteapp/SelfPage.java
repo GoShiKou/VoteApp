@@ -30,7 +30,7 @@ public class SelfPage extends AppCompatActivity {
     ArrayAdapter<String> adapter;
     ListView selfVote;
     SharedPreferences pref;
-//
+    //
 //
 //    @Override
 //    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -97,7 +97,7 @@ public class SelfPage extends AppCompatActivity {
             }
         });
     }
-//
+    //
 //    // create sample post data
     private List<Post> createSamplePosts() {
         List<Post> posts = new ArrayList<>();
@@ -108,7 +108,7 @@ public class SelfPage extends AppCompatActivity {
     }
 }
 //
- class Post {
+class Post {
     private int avatarResId;
     private String username;
     private String postContent;
