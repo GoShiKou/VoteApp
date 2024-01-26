@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         pref = PreferenceManager.getDefaultSharedPreferences(this);
         editor = pref.edit();
 
+
         Intent createPage = new Intent(this, CreatePage.class);
         Intent votePage = new Intent(this, VotePage.class);
 

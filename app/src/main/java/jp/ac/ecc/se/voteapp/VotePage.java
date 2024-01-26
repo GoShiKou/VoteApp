@@ -3,6 +3,7 @@ package jp.ac.ecc.se.voteapp;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -13,14 +14,16 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.net.Uri;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+
 
 
 public class VotePage extends AppCompatActivity {
