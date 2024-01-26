@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         pref = PreferenceManager.getDefaultSharedPreferences(this);
         editor = pref.edit();
 
+
         Intent createPage = new Intent(this, CreatePage.class);
         Intent votePage = new Intent(this, VotePage.class);
 
@@ -80,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
         searchText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 adapter.getFilter().filter(s);
