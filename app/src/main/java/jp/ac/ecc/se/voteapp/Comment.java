@@ -228,8 +228,8 @@ public class Comment extends AppCompatActivity {
         if (!pref.getString(title +"commentList", "").isEmpty()) {
             loadCommentsFromStorage();
         }
-            adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, commentList);
-            MyCommentView.setAdapter(adapter);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, commentList);
+        MyCommentView.setAdapter(adapter);
 
 
         CommentButton.setOnClickListener(new View.OnClickListener() {
