@@ -109,7 +109,7 @@ public class Comment extends AppCompatActivity {
 
 
                             // Save the updated commentList to SharedPreferences or any other storage method
-                            //saveCommentsToStorage(commentList);
+                            saveCommentsToStorage(commentList);
                         }
 
                         dialog.dismiss();
