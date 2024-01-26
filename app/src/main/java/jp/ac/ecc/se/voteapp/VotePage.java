@@ -31,7 +31,7 @@ public class VotePage extends AppCompatActivity {
     ImageView showImage;
     ImageView notH;
     ImageView notP;
-    ImageView XImage;
+    Button delete;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
     Uri imageUri;
@@ -122,15 +122,25 @@ public class VotePage extends AppCompatActivity {
                 Intent commentIntent = new Intent(VotePage.this, Comment.class);
 
                 // Get the selected title and image URI
-                String selectedTitle = showTitle.getText().toString();
+//                String selectedTitle = showTitle.getText().toString();
 //                String selectedImageUri = uriArray.get(selectTitle);
 
                 // Pass title and image URI to CommentPage
-                commentIntent.putExtra(list + "title", selectedTitle);
+               // Intent intent = getIntent();
 
-                startActivity(commentIntent);
-            }
-        });
+//                int selectTitle = intent.getIntExtra("selectedTitle", -1);
+//                commentIntent.putExtra("selectTitle", selectTitle);
+
+               // startActivity(commentIntent);
+
+
+                        // Pass the selected title position
+                        commentIntent.putExtra("selectedTitle", selectTitle);
+
+                        startActivity(commentIntent);
+                    }
+                });
+
 
         notH.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,11 +154,18 @@ public class VotePage extends AppCompatActivity {
                 startActivity(intentP);
             }
         });
-        XImage= findViewById(R.id.XImage);
-        XImage.setOnClickListener(new View.OnClickListener() {
+        delete= findViewById(R.id.Delete);
+        delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                editor.remove(MainActivity.titleList.get(selectTitle)+"title");
+                editor.remove(MainActivity.titleList.get(selectTitle)+"uri");
+                editor.remove(MainActivity.titleList.get(selectTitle)+"listData");
+                editor.remove(MainActivity.titleList.remove(selectTitle));
+                String titleString = String.join(",",MainActivity.titleList);
+                editor.putString("list",titleString);
+                editor.apply();
+                finish();
             }
         });
     }
