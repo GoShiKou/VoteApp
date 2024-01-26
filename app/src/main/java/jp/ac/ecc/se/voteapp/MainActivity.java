@@ -137,12 +137,14 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         ListView todoListView = findViewById(R.id.voteList);
         mainList.clear();
-        String[] titleSprit = pref.getString("list", "").split(",");
-        String[] index = new String[titleSprit.length];
-        for (int i = 0; i < titleSprit.length; i++) {
-            index[i] = pref.getString(titleSprit[i] + "title", "");
+        if (!pref.getString("list", "").isEmpty()) {
+            String[] titleSprit = pref.getString("list", "").split(",");
+            String[] index = new String[titleSprit.length];
+            for (int i = 0; i < titleSprit.length; i++) {
+                index[i] = pref.getString(titleSprit[i] + "title", "");
+            }
+            mainList.addAll(Arrays.asList(index));
         }
-        mainList.addAll(Arrays.asList(index));
         ArrayAdapter<String> adapter2 = new ArrayAdapter(this, android.R.layout.simple_list_item_1, mainList);
         todoListView.setAdapter(adapter2);
     }
