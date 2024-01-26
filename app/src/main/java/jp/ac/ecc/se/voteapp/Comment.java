@@ -165,6 +165,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -211,6 +212,7 @@ public class Comment extends AppCompatActivity {
         ListView MyCommentView = findViewById(R.id.MyCommentView);
         TextView EmojiNumber = findViewById(R.id.EmojiNumber);
         TextView CommentNumber = findViewById(R.id.CommentNumber);
+        ImageView image3 = findViewById(R.id.Image3);
 
         Intent intent = getIntent();
         int selectTitle = intent.getIntExtra("selectedTitle", -1);
@@ -218,6 +220,8 @@ public class Comment extends AppCompatActivity {
         String uriString = pref.getString(MainActivity.titleList.get(selectTitle) + "uri", "");
         Uri Imageuri = Uri.parse(uriString);
         commentTitle.setText(titleString);
+        image3.setImageURI(Imageuri);
+
 
         // Load comments from SharedPreferences and display them
         loadCommentsFromStorage();
