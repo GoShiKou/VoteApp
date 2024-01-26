@@ -171,7 +171,9 @@ public class VotePage extends AppCompatActivity {
     }
 
     private ArrayList<String> getDataFromSharedPreferences() {
-        String title = showTitle.getText().toString();
+        Intent intent = getIntent();
+        int selectTitle = intent.getIntExtra("selectedTitle", -1);
+        String title = MainActivity.titleList.get(selectTitle);
         SharedPreferences preferences = getSharedPreferences(title + "listData",MODE_PRIVATE);
         Set<String> detaSet = preferences.getStringSet(title + "listData",new HashSet<>());
 
