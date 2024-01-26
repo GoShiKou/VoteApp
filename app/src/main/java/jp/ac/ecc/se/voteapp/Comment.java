@@ -224,9 +224,13 @@ public class Comment extends AppCompatActivity {
 
 
         // Load comments from SharedPreferences and display them
-        loadCommentsFromStorage();
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, commentList);
-        MyCommentView.setAdapter(adapter);
+        String title = MainActivity.titleList.get(selectTitle);
+        if (!pref.getString(title +"commentList", "").isEmpty()) {
+            loadCommentsFromStorage();
+        }
+            adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, commentList);
+            MyCommentView.setAdapter(adapter);
+
 
         CommentButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -246,7 +250,9 @@ public class Comment extends AppCompatActivity {
                             commentList.add(comment);
                             commentButtonCount++;
                             updateCommentButtonCount();
-                            adapter.notifyDataSetChanged();
+                            if (adapter != null) {
+                                adapter.notifyDataSetChanged();
+                            }
                             MyCommentView.setAdapter(adapter);
                             saveCommentsToStorage(commentList);
                         }
@@ -310,16 +316,20 @@ public class Comment extends AppCompatActivity {
 
 
     private void saveCommentsToStorage(ArrayList<String> comments) {
-        String title = commentTitle.getText().toString();
-        SharedPreferences.Editor editor = getSharedPreferences(title + "MyPrefs", MODE_PRIVATE).edit();
-        editor.putString("commentList", TextUtils.join(",", comments));
+        Intent intent = getIntent();
+        int selectTitle = intent.getIntExtra("selectedTitle", -1);
+        String title = MainActivity.titleList.get(selectTitle);
+        SharedPreferences.Editor editor = getSharedPreferences(title + "commentList" , MODE_PRIVATE).edit();
+        editor.putString(title +"commentList", TextUtils.join(",", comments));
         editor.apply();
     }
 
     private void loadCommentsFromStorage() {
-        String title = commentTitle.getText().toString();
-        SharedPreferences pref = getSharedPreferences(title + "MyPrefs", MODE_PRIVATE);
-        String commentsString = pref.getString("commentList", "");
+        Intent intent = getIntent();
+        int selectTitle = intent.getIntExtra("selectedTitle", -1);
+        String title = MainActivity.titleList.get(selectTitle);
+        SharedPreferences pref = getSharedPreferences(title + "commentList", MODE_PRIVATE);
+        String commentsString = pref.getString(title +"commentList", "");
         String[] commentsArray = commentsString.split(",");
         commentList.addAll(Arrays.asList(commentsArray));
     }
