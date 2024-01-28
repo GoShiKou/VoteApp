@@ -25,6 +25,7 @@ import java.util.Set;
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_CREATE_NOTE = 1;
     public static ArrayList<String> titleList = new ArrayList<>();
+    ArrayList<String> mainList = new ArrayList<>();
     ArrayAdapter<String> adapter;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
@@ -33,9 +34,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, titleList);
-        voteList.setAdapter(adapter);
+//        voteList.setAdapter(adapter);
 
     }
 
@@ -55,39 +55,50 @@ public class MainActivity extends AppCompatActivity {
         voteList = findViewById(R.id.voteList);
         EditText searchText = findViewById(R.id.SearchText);
         titleList = new ArrayList<>();
+        mainList = new ArrayList<>();
         ImageView profile = findViewById(R.id.profileImage);
 
-        String str_title = pref.getString("title", "");
-        if (str_title != null && !str_title.equals("")) {
-            String[] List = str_title.split(",");
+//        String str_title = pref.getString("title", "");
+//        if (str_title != null && !str_title.equals("")) {
+//            String[] List = str_title.split(",");
+//
+//            for (int i = 0; i < List.length; i++) {
+//                titleList.add(List[i]);
+//            }
+//        }
 
-            for (int i = 0; i < List.length; i++) {
-                titleList.add(List[i]);
-            }
-        }
-
-        if(!pref.getString("list","").isEmpty()) {
+        if (!pref.getString("list", "").isEmpty()) {
             String[] titleSprit = pref.getString("list", "").split(",");
             titleList.addAll(Arrays.asList(titleSprit));
+            String[] index = new String[titleSprit.length];
+            for (int i = 0; i < titleSprit.length; i++) {
+                index[i] = pref.getString(titleSprit[i] + "title", "");
+            }
+            mainList.addAll(Arrays.asList(index));
         }
-        ArrayAdapter<String> adapter2 = new ArrayAdapter(this, android.R.layout.simple_list_item_1, titleList);
+//        titleList.clear();
+//        mainList.clear();
+        ArrayAdapter<String> adapter2 = new ArrayAdapter(this, android.R.layout.simple_list_item_1, mainList);
         voteList.setAdapter(adapter2);
 
         //アダプター
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_activated_1, titleList);
-        voteList.setAdapter(adapter);
+//        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_activated_1, titleList);
+//        voteList.setAdapter(adapter);
 
         // 検索の処理
         searchText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 adapter.getFilter().filter(s);
             }
 
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+            }
         });
 
         // 投票作成
@@ -125,7 +136,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         ListView todoListView = findViewById(R.id.voteList);
-        ArrayAdapter<String> adapter2 = new ArrayAdapter(this, android.R.layout.simple_list_item_1, titleList);
+        mainList.clear();
+        if (!pref.getString("list", "").isEmpty()) {
+            String[] titleSprit = pref.getString("list", "").split(",");
+            String[] index = new String[titleSprit.length];
+            for (int i = 0; i < titleSprit.length; i++) {
+                index[i] = pref.getString(titleSprit[i] + "title", "");
+            }
+            mainList.addAll(Arrays.asList(index));
+        }
+        ArrayAdapter<String> adapter2 = new ArrayAdapter(this, android.R.layout.simple_list_item_1, mainList);
         todoListView.setAdapter(adapter2);
     }
 }

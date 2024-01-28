@@ -126,20 +126,20 @@ public class VotePage extends AppCompatActivity {
 //                String selectedImageUri = uriArray.get(selectTitle);
 
                 // Pass title and image URI to CommentPage
-               // Intent intent = getIntent();
+                // Intent intent = getIntent();
 
 //                int selectTitle = intent.getIntExtra("selectedTitle", -1);
 //                commentIntent.putExtra("selectTitle", selectTitle);
 
-               // startActivity(commentIntent);
+                // startActivity(commentIntent);
 
 
-                        // Pass the selected title position
-                        commentIntent.putExtra("selectedTitle", selectTitle);
+                // Pass the selected title position
+                commentIntent.putExtra("selectedTitle", selectTitle);
 
-                        startActivity(commentIntent);
-                    }
-                });
+                startActivity(commentIntent);
+            }
+        });
 
 
         notH.setOnClickListener(new View.OnClickListener() {
@@ -171,7 +171,9 @@ public class VotePage extends AppCompatActivity {
     }
 
     private ArrayList<String> getDataFromSharedPreferences() {
-        String title = showTitle.getText().toString();
+        Intent intent = getIntent();
+        int selectTitle = intent.getIntExtra("selectedTitle", -1);
+        String title = MainActivity.titleList.get(selectTitle);
         SharedPreferences preferences = getSharedPreferences(title + "listData",MODE_PRIVATE);
         Set<String> detaSet = preferences.getStringSet(title + "listData",new HashSet<>());
 

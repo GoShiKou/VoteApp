@@ -2,6 +2,8 @@ package jp.ac.ecc.se.voteapp;
 
 import static android.text.method.TextKeyListener.clear;
 
+import static jp.ac.ecc.se.voteapp.MainActivity.titleList;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -28,7 +30,7 @@ public class SelfPage extends AppCompatActivity {
     ArrayAdapter<String> adapter;
     ListView selfVote;
     SharedPreferences pref;
-//
+    //
 //
 //    @Override
 //    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -64,7 +66,11 @@ public class SelfPage extends AppCompatActivity {
         pref = PreferenceManager.getDefaultSharedPreferences(this);
         if(!pref.getString("list","").isEmpty()) {
             String[] titleSprit = pref.getString("list", "").split(",");
-            titlelist.addAll(Arrays.asList(titleSprit));
+            String[] index = new String[titleSprit.length];
+            for (int i = 0; i <titleSprit.length; i++){
+                index[i] = pref.getString(titleSprit[i]+"title","");
+            }
+            titlelist.addAll(Arrays.asList(index));
         }
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_activated_1, titlelist);
         selfVote.setAdapter(adapter);
@@ -91,7 +97,7 @@ public class SelfPage extends AppCompatActivity {
             }
         });
     }
-//
+    //
 //    // create sample post data
     private List<Post> createSamplePosts() {
         List<Post> posts = new ArrayList<>();
@@ -102,7 +108,7 @@ public class SelfPage extends AppCompatActivity {
     }
 }
 //
- class Post {
+class Post {
     private int avatarResId;
     private String username;
     private String postContent;

@@ -38,19 +38,23 @@ public class CreatePage extends AppCompatActivity {
     final int CAMERA_RESULT = 100;
     public Uri image;
     Uri imageUri;
+
     private void saveDataToSharedPreferences(ArrayList<String> dataList) {
         String title = taitoru.getText().toString();
+        String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String key = title + "_" + timestamp;
         // SharedPreferencesにデータを保存
-        SharedPreferences preferences = getSharedPreferences(title + "listData", MODE_PRIVATE);
+        SharedPreferences preferences = getSharedPreferences(key + "listData", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
 
         // リストのデータを保存
         Set<String> dataSet = new HashSet<>(dataList);
-        editor.putStringSet(title + "listData", dataSet);
+        editor.putStringSet(key + "listData", dataSet);
 
         // 変更を保存
         editor.apply();
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -66,7 +70,7 @@ public class CreatePage extends AppCompatActivity {
         }
     }
 
-    public void addItem(){
+    public void addItem() {
         choice = findViewById(R.id.editText);
         String newItem = choice.getText().toString().trim();
 
@@ -90,29 +94,30 @@ public class CreatePage extends AppCompatActivity {
         ImageView imageView = findViewById(R.id.image);
         ListView = findViewById(R.id.list);
 
-        Intent intent = getIntent();
-        int selectTitle = intent.getIntExtra("selectedTitle", -1);
-
-        if (selectTitle != -1) {
-            String list = MainActivity.titleList.get(selectTitle);
-            String title = pref.getString(list + "title", "");
-            String uri = pref.getString(list + "uri", "");
-            Uri ImageUri =Uri.parse(uri);
-            taitoru.setText(title);
-            imageView.setImageURI(ImageUri);
-        }
+//        Intent intent = getIntent();
+//        int selectTitle = intent.getIntExtra("selectedTitle", -1);
+//        if (selectTitle != -1) {
+//            String list = MainActivity.titleList.get(selectTitle);
+//            String title = pref.getString(list + "title", "");
+//            String uri = pref.getString(list + "uri", "");
+//            Uri ImageUri =Uri.parse(uri);
+//            taitoru.setText(title);
+//            imageView.setImageURI(ImageUri);
+//        }
 
         //投稿button
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SharedPreferences.Editor editor = pref.edit();
-                String title = taitoru.getText().toString();
+                String title1 = taitoru.getText().toString();
+                String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+                String title = title1 + "_" + timestamp;
                 if (!taitoru.getText().toString().isEmpty()) {
-                    if (selectTitle == -1) {
-                        MainActivity.titleList.add(taitoru.getText().toString());
-                    }
-                    editor.putString(title + "title", title);
+
+                    MainActivity.titleList.add(title);
+
+                    editor.putString(title + "title", title1);
                     if (datalist != null) {
                         editor.putString(title + "vote", datalist.toString());
                     }
@@ -132,7 +137,7 @@ public class CreatePage extends AppCompatActivity {
         });
         AddButton = findViewById(R.id.addButton);
         datalist = new ArrayList<>();
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,datalist);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, datalist);
         ListView.setAdapter(adapter);
         //listに追加
         AddButton.setOnClickListener(new View.OnClickListener() {
