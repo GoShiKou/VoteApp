@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, titleList);
-        voteList.setAdapter(adapter);
+//        voteList.setAdapter(adapter);
 
     }
 
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         }
 //        titleList.clear();
 //        mainList.clear();
-        ArrayAdapter<String> adapter2 = new ArrayAdapter(this, android.R.layout.simple_list_item_1, titleList);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter(this, android.R.layout.simple_list_item_1, mainList);
         voteList.setAdapter(adapter2);
 
         //アダプター
