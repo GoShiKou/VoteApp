@@ -280,17 +280,7 @@ public class Comment extends AppCompatActivity {
             }
         });
 
-//        EmojiButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//                public void onClick(View view) {
-//                    if (!hasPressedEmojiButton) {
-//                        emojiButtonCount++;
-//                        updateEmojiButtonCount();
-//                        hasPressedEmojiButton = true;
-//                    }
-//                }
-//
-//        });
+
         EmojiButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -308,33 +298,49 @@ public class Comment extends AppCompatActivity {
                 updateEmojiButtonCount();
             }
         });
-
-        // ... (other initialization code)
     }
 
 
 
 
+//    private void saveCommentsToStorage(ArrayList<String> comments) {
+//        Intent intent = getIntent();
+//        int selectTitle = intent.getIntExtra("selectedTitle", -1);
+//        String title = MainActivity.titleList.get(selectTitle);
+//        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+//        SharedPreferences.Editor editor = pref.edit();
+//        editor.putString(title +"commentList", TextUtils.join(",", comments));
+//        editor.apply();
+//    }
     private void saveCommentsToStorage(ArrayList<String> comments) {
         Intent intent = getIntent();
         int selectTitle = intent.getIntExtra("selectedTitle", -1);
         String title = MainActivity.titleList.get(selectTitle);
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = pref.edit();
-        editor.putString(title +"commentList", TextUtils.join(",", comments));
+        editor.putString(title + "commentList", TextUtils.join(",", comments));
+        editor.putInt(title + "emojiButtonCount", emojiButtonCount);
+        editor.putBoolean(title + "isEmojiClicked", isEmojiClicked);
         editor.apply();
     }
 
-    private void loadCommentsFromStorage() {
-        Intent intent = getIntent();
-        int selectTitle = intent.getIntExtra("selectedTitle", -1);
-        String title = MainActivity.titleList.get(selectTitle);
-//        SharedPreferences pref = getSharedPreferences(title + "commentList", MODE_PRIVATE);
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-        String commentsString = pref.getString(title +"commentList", "");
-        String[] commentsArray = commentsString.split(",");
-        commentList.addAll(Arrays.asList(commentsArray));
-    }
+
+
+
+private void loadCommentsFromStorage() {
+    Intent intent = getIntent();
+    int selectTitle = intent.getIntExtra("selectedTitle", -1);
+    String title = MainActivity.titleList.get(selectTitle);
+    SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+
+    String commentsString = pref.getString(title + "commentList", "");
+    String[] commentsArray = commentsString.split(",");
+    commentList.addAll(Arrays.asList(commentsArray));
+
+    emojiButtonCount = pref.getInt(title + "emojiButtonCount", 0);
+    isEmojiClicked = pref.getBoolean(title + "isEmojiClicked", false);
+    updateEmojiButtonCount(); // Update the UI based on the loaded state
+}
 
     private void updateEmojiButtonCount() {
         TextView emojiNumberView = findViewById(R.id.EmojiNumber);
