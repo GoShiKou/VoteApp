@@ -2,12 +2,14 @@ package jp.ac.ecc.se.voteapp;
 
 import static android.text.method.TextKeyListener.clear;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 import static jp.ac.ecc.se.voteapp.MainActivity.titleList;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
@@ -17,9 +19,17 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,11 +56,67 @@ public class SelfPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selfpage);
 
-
         selfVote = findViewById(R.id.selfvote);
         ImageView img = findViewById(R.id.selfie);
         TextView text = findViewById(R.id.selfInfo);
         ImageView homePG = findViewById(R.id.PtoH);
+        Button login = findViewById(R.id.loginButton);
+
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+
+        if (auth.getCurrentUser() != null) {
+            // User is logged in
+            login.setText("ログアウト"); // Change button text to "Logout"
+        } else {
+            // User is not logged in
+            login.setText("ログイン"); // Keep button text as "Login"
+        }
+
+        // Login
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (auth.getCurrentUser() != null) {
+                    // User is logged in, perform logout
+                    FirebaseAuth.getInstance().signOut();
+                    // Redirect to login page or perform any necessary action after logout
+                    Intent intent = new Intent(SelfPage.this, SelfPage.class);
+                    startActivity(intent);
+                    finish(); // Close current activity after logout
+                } else {
+                    // User is not logged in, redirect to login page
+                    Intent intent = new Intent(SelfPage.this, LoginActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+
+        String uid = null;
+        if (auth.getCurrentUser() != null) {
+            // User is logged in
+            uid = auth.getCurrentUser().getUid();
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(uid);
+            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        String userName = snapshot.child("name").getValue(String.class);
+
+                        text.setText(userName);
+                    } else {
+                        Log.d(TAG, "User data does not exist");
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        } else {
+            // User is not logged in
+            // ここでは例えばログイン画面に遷移するなど
+        }
 
         Intent vtpg = new Intent(this, VotePage.class);
 //

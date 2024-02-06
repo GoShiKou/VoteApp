@@ -58,6 +58,7 @@
         android:background="@color/white"
         android:gravity="center"
         android:text="@string/userid"
+        android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="@+id/layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -136,5 +137,16 @@
         </com.google.android.material.bottomappbar.BottomAppBar>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="25dp"
+        android:text="ログイン"
+        android:backgroundTint="@color/design_default_color_secondary_variant"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
